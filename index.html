@@ -75,7 +75,7 @@
 
     label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; }
 
-    input[type="text"], textarea {
+    input[type="text"], input[type="password"], textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid var(--border);
@@ -85,7 +85,7 @@
       transition: border 0.2s;
     }
 
-    input[type="text"]:focus, textarea:focus {
+    input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
       border-color: var(--primary);
     }
 
@@ -192,6 +192,10 @@
       <label for="student-index">Index / Student Number:</label>
       <input type="text" id="student-index" placeholder="e.g., IT2024001" required>
     </div>
+    <div class="form-group">
+      <label for="instructor-password">Instructor Passcode / PIN:</label>
+      <input type="password" id="instructor-password" placeholder="Enter instructor passcode to start" required>
+    </div>
     
     <div style="background: #eff6ff; padding: 12px; border-radius: 6px; margin-bottom: 18px; font-size: 0.85rem; color: #1e40af;">
       <strong>Rules & Instructions:</strong>
@@ -241,13 +245,19 @@
       <div class="score-number" id="final-score">0 / 10</div>
       <p id="score-percentage" style="font-weight: 600; font-size: 1.1rem; color: #334155;"></p>
       <p id="submission-status" style="margin-top: 15px; font-size: 0.85rem; color: #059669;"></p>
+      
+      <!-- BUTTON TO RESET PAGE FOR NEXT PRACTICAL STUDENT -->
+      <button class="btn btn-secondary" onclick="resetForNextStudent()" style="margin-top: 20px;">🔄 Start Next Student's Assessment</button>
     </div>
   </div>
 
 </div>
 
 <script>
-  // YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+  // SET YOUR INSTRUCTOR PASSWORD HERE
+  const INSTRUCTOR_PASSWORD = "21472";
+
+  // DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
   const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxEqGPFSQTj_gmuPP5UwW2J5LbpQMNd3LdWziOeJY4PR8mMmoCJZusnZh9A6dZpHW2H/exec";
 
   // 25 QUESTION BANK (50% Hard Questions | Data Comm & Networking Topic Focus)
@@ -312,13 +322,19 @@
     return [...mcqs, ...typeds].sort(() => 0.5 - Math.random());
   }
 
-  // START VIVA
+  // START VIVA (WITH PASSWORD CHECK)
   function startViva() {
     const nameInput = document.getElementById('student-name').value.trim();
     const indexInput = document.getElementById('student-index').value.trim();
+    const passwordInput = document.getElementById('instructor-password').value.trim();
 
     if (!nameInput || !indexInput) {
       alert("Please enter both your Name and Index Number.");
+      return;
+    }
+
+    if (passwordInput !== INSTRUCTOR_PASSWORD) {
+      alert("❌ Invalid Instructor Passcode! Please ask the lecturer/instructor to authorize your test.");
       return;
     }
 
@@ -493,6 +509,28 @@
     .catch(err => {
       document.getElementById('submission-status').innerText = "⚠ Submitted, but could not connect to Google Sheet.";
     });
+  }
+
+  // RESET PAGE FOR NEXT PRACTICAL STUDENT
+  function resetForNextStudent() {
+    // Reset state variables
+    studentData = { name: '', indexNumber: '' };
+    selectedQuestions = [];
+    currentQuestionIndex = 0;
+    totalScore = 0;
+    timeRemaining = 600;
+    tabSwitchViolations = 0;
+    if (timerInterval) clearInterval(timerInterval);
+
+    // Clear form inputs
+    document.getElementById('student-name').value = '';
+    document.getElementById('student-index').value = '';
+    document.getElementById('instructor-password').value = '';
+
+    // Reset interface visibility
+    document.getElementById('result-section').classList.add('hidden');
+    document.getElementById('warning-banner').style.display = 'none';
+    document.getElementById('login-section').classList.remove('hidden');
   }
 </script>
 
