@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Viva & Quiz Assessment</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+      --success: #22c55e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+      position: relative;
+    }
+
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .timer-badge {
+      background: #fee2e2;
+      color: var(--danger);
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+    }
+
+    .warning-banner {
+      background-color: #fef2f2;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 0.88rem;
+      display: none;
+    }
+
+    h2 { font-size: 1.4rem; margin-bottom: 15px; color: #0f172a; }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    input[type="text"]:focus, textarea:focus {
+      border-color: var(--primary);
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    .btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: var(--primary-hover); }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid var(--border);
+      margin-top: 10px;
+    }
+
+    .btn-secondary:hover { background: #e2e8f0; }
+
+    .qr-box {
+      text-align: center;
+      background: #f8fafc;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .qr-box img {
+      width: 160px;
+      height: 160px;
+      margin-top: 8px;
+      border-radius: 6px;
+    }
+
+    .options-list { list-style: none; margin-top: 10px; }
+
+    .option-item {
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .option-item:hover { background: #f1f5f9; }
+
+    .option-item input { margin-right: 12px; accent-color: var(--primary); }
+
+    .word-count {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .progress-text {
+      font-size: 0.85rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .score-box {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .score-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 10px 0;
+    }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- LOGIN SECTION -->
+  <div id="login-section">
+    <h2>Student Viva Registration</h2>
+    <div class="form-group">
+      <label for="student-name">Full Name:</label>
+      <input type="text" id="student-name" placeholder="Enter your full name" required>
+    </div>
+    <div class="form-group">
+      <label for="student-index">Index / Student Number:</label>
+      <input type="text" id="student-index" placeholder="e.g., IT2024001" required>
+    </div>
+    
+    <div style="background: #eff6ff; padding: 12px; border-radius: 6px; margin-bottom: 18px; font-size: 0.85rem; color: #1e40af;">
+      <strong>Rules & Instructions:</strong>
+      <ul style="margin-left: 18px; margin-top: 5px;">
+        <li>10 Random Questions (6 MCQ + 4 Short Answer).</li>
+        <li>Time Limit: Exactly 10 minutes.</li>
+        <li>No going back once you click "Next".</li>
+        <li>Switching tabs/windows twice auto-submits the test.</li>
+      </ul>
+    </div>
+
+    <button class="btn" onclick="startViva()">Start Assessment</button>
+    <button class="btn btn-secondary" onclick="toggleQRCode()">📱 Show/Hide Join QR Code</button>
+
+    <!-- QR CODE CONTAINER FOR CLASSROOM PROJECTOR -->
+    <div id="qr-box" class="qr-box">
+      <p style="font-size: 0.85rem; font-weight: 600; color: #475569;">Scan QR Code to Join Viva on Mobile:</p>
+      <img id="qr-img" src="" alt="Quiz QR Code">
+    </div>
+  </div>
+
+  <!-- VIVA QUIZ SECTION -->
+  <div id="quiz-section" class="hidden">
+    <div class="header-bar">
+      <span class="progress-text" id="question-progress">Question 1 of 10</span>
+      <span class="timer-badge" id="timer-display">10:00</span>
+    </div>
+
+    <div id="warning-banner" class="warning-banner">
+      ⚠️ <strong>Warning:</strong> Tab switching detected! A second violation will automatically submit your test.
+    </div>
+
+    <div id="question-container">
+      <!-- Dynamic Question Content -->
+    </div>
+
+    <div style="margin-top: 20px;">
+      <button class="btn" id="next-btn" onclick="nextQuestion()">Next Question</button>
+    </div>
+  </div>
+
+  <!-- RESULT SECTION -->
+  <div id="result-section" class="hidden">
+    <div class="score-box">
+      <h2>Viva Completed</h2>
+      <p style="color: #64748b;">Your response has been recorded and submitted.</p>
+      <div class="score-number" id="final-score">0 / 10</div>
+      <p id="score-percentage" style="font-weight: 600; font-size: 1.1rem; color: #334155;"></p>
+      <p id="submission-status" style="margin-top: 15px; font-size: 0.85rem; color: #059669;"></p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+  const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxEqGPFSQTj_gmuPP5UwW2J5LbpQMNd3LdWziOeJY4PR8mMmoCJZusnZh9A6dZpHW2H/exec";
+
+  // 25 QUESTION BANK (50% Hard Questions | Data Comm & Networking Topic Focus)
+  const questionBank = [
+    // MCQs (15 Questions)
+    { id: 1, type: 'mcq', diff: 'hard', q: "In Manchester (IEEE 802.3) encoding, how is a binary '1' represented?", options: ["Falling edge at mid-bit", "Rising edge at mid-bit", "Constant high level", "No transition"], correct: 1 },
+    { id: 2, type: 'mcq', diff: 'hard', q: "Why is NRZ encoding unsuitable for clock synchronization over long sequences of identical bits?", options: ["High optical power required", "Lacks spectral transition components for PLL locking", "Doubles transmission bandwidth", "Causes DC bias instability"], correct: 1 },
+    { id: 3, type: 'mcq', diff: 'hard', q: "In Bi-Phase Mark (Bi-Phase M) encoding, when does a signal transition occur?", options: ["Only at mid-bit for '0'", "Always at bit start, and mid-bit if data is '1'", "Always at bit start, and mid-bit if data is '0'", "Only at bit boundaries"], correct: 1 },
+    { id: 4, type: 'mcq', diff: 'medium', q: "What effect does increasing Signal-to-Noise Ratio (SNR) have on Bit Error Rate (BER)?", options: ["Increases BER", "Decreases BER", "Has no effect on BER", "BER becomes zero immediately"], correct: 1 },
+    { id: 5, type: 'mcq', diff: 'medium', q: "Which pin on a standard DE-9 serial port carries Transmitted Data (TD)?", options: ["Pin 2", "Pin 3", "Pin 5", "Pin 7"], correct: 1 },
+    { id: 6, type: 'mcq', diff: 'hard', q: "In Bi-Phase Space (Bi-Phase S) encoding, mid-bit transition occurs when the data bit is:", options: ["Logic 1", "Logic 0", "Both 0 and 1", "Neither"], correct: 1 },
+    { id: 7, type: 'mcq', diff: 'hard', q: "What are the standard RS-232 voltage levels for Logic 0 (Space) and Logic 1 (Mark)?", options: ["0V and +5V", "+3V to +15V (Space) and -3V to -15V (Mark)", "-3V to -15V (Space) and +3V to +15V (Mark)", "+12V and 0V"], correct: 1 },
+    { id: 8, type: 'mcq', diff: 'medium', q: "What is a major advantage of Manchester encoding over NRZ?", options: ["Requires lower bandwidth", "Self-clocking with zero DC bias component", "Eliminates attenuation", "Allows parallel transfer"], correct: 1 },
+    { id: 9, type: 'mcq', diff: 'medium', q: "In asynchronous serial transmission, what alerts the receiver of incoming data?", options: ["Parity Bit", "Stop Bit", "Start Bit", "Clock Pulse"], correct: 2 },
+    { id: 10, type: 'mcq', diff: 'hard', q: "What component converts optical pulses into voltage in an optical receiver?", options: ["Line Driver", "Trans-impedance Amplifier", "BIAS Trimmer", "Phase Locked Loop"], correct: 1 },
+    { id: 11, type: 'mcq', diff: 'medium', q: "Which change allows an increased data rate without degrading BER?", options: ["Decreasing Bandwidth", "Increasing Channel Bandwidth & SNR", "Lowering signal power", "Extending bit interval"], correct: 1 },
+    { id: 12, type: 'mcq', diff: 'medium', q: "Which encoding method is used in 10BASE-T Ethernet?", options: ["NRZ-L", "Manchester", "Bi-Phase Space", "4B5B"], correct: 1 },
+    { id: 13, type: 'mcq', diff: 'hard', q: "What occurs if receiver and transmitter clocks misalign in NRZ transmission?", options: ["Automatic re-sync", "Bit slip errors over consecutive identical bits", "Inverted polarity", "Signal suppression"], correct: 1 },
+    { id: 14, type: 'mcq', diff: 'hard', q: "What is the primary role of the BIAS trimmer in an optical transmitter circuit?", options: ["Clock recovery", "Sets the optical LED DC operating bias current", "RS-232 level shifting", "Sampling clock adjustment"], correct: 1 },
+    { id: 15, type: 'mcq', diff: 'hard', q: "How does synchronous transmission differ from asynchronous serial transmission?", options: ["Uses fiber optics", "Uses continuous shared timing/clock rather than start/stop bits", "Limited to 19200 bps", "Cannot send binary text"], correct: 1 },
+
+    // SHORT ANSWER / TYPED QUESTIONS (10 Questions)
+    { id: 16, type: 'typed', diff: 'medium', q: "Explain why Manchester encoding is considered 'self-clocking'.", keywords: ["transition", "mid", "clock", "sync"], maxWords: 35 },
+    { id: 17, type: 'typed', diff: 'hard', q: "Describe the function of line receivers and line drivers in RS-232 to TTL conversion.", keywords: ["voltage", "ttl", "convert", "rs232", "level"], maxWords: 40 },
+    { id: 18, type: 'typed', diff: 'medium', q: "What causes optical signal attenuation in optical fiber transmission?", keywords: ["loss", "attenuation", "dispersion", "coupling", "fiber"], maxWords: 35 },
+    { id: 19, type: 'typed', diff: 'hard', q: "Explain the role of a Phase Locked Loop (PLL) in a digital data receiver.", keywords: ["clock", "phase", "sync", "lock", "frequency"], maxWords: 35 },
+    { id: 20, type: 'typed', diff: 'hard', q: "Distinguish between Bi-Phase Mark (Bi-Phase M) and Bi-Phase Space (Bi-Phase S).", keywords: ["mark", "space", "transition", "middle", "start"], maxWords: 40 },
+    { id: 21, type: 'typed', diff: 'medium', q: "List four core parameters required to configure serial terminal communication.", keywords: ["baud", "rate", "parity", "stop", "flow"], maxWords: 30 },
+    { id: 22, type: 'typed', diff: 'hard', q: "How does increasing bandwidth affect channel capacity according to Shannon-Nyquist theorem?", keywords: ["capacity", "bandwidth", "rate", "increase", "data"], maxWords: 35 },
+    { id: 23, type: 'typed', diff: 'medium', q: "Why are start and stop bits essential in asynchronous framing?", keywords: ["sync", "frame", "start", "stop", "timing"], maxWords: 35 },
+    { id: 24, type: 'typed', diff: 'hard', q: "Describe how a photodiode and trans-impedance amplifier convert optical signals.", keywords: ["light", "current", "voltage", "photodiode", "amp"], maxWords: 40 },
+    { id: 25, type: 'typed', diff: 'hard', q: "Why is the absence of a DC component advantageous in line codes like Manchester?", keywords: ["dc", "ac", "coupling", "transformer", "bias"], maxWords: 35 }
+  ];
+
+  // STATE VARIABLES
+  let studentData = { name: '', indexNumber: '' };
+  let selectedQuestions = [];
+  let currentQuestionIndex = 0;
+  let totalScore = 0;
+  let timeRemaining = 600; // 10 mins
+  let timerInterval = null;
+  let tabSwitchViolations = 0;
+
+  // TOGGLE & GENERATE QR CODE AUTOMATICALLY
+  function toggleQRCode() {
+    const qrBox = document.getElementById('qr-box');
+    const qrImg = document.getElementById('qr-img');
+    
+    if (qrBox.style.display === 'block') {
+      qrBox.style.display = 'none';
+    } else {
+      const currentURL = window.location.href;
+      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentURL)}`;
+      qrBox.style.display = 'block';
+    }
+  }
+
+  // RANDOM SELECTION: 6 MCQs + 4 TYPED QUESTIONS
+  function generateQuizSet() {
+    const mcqs = questionBank.filter(q => q.type === 'mcq').sort(() => 0.5 - Math.random()).slice(0, 6);
+    const typeds = questionBank.filter(q => q.type === 'typed').sort(() => 0.5 - Math.random()).slice(0, 4);
+    return [...mcqs, ...typeds].sort(() => 0.5 - Math.random());
+  }
+
+  // START VIVA
+  function startViva() {
+    const nameInput = document.getElementById('student-name').value.trim();
+    const indexInput = document.getElementById('student-index').value.trim();
+
+    if (!nameInput || !indexInput) {
+      alert("Please enter both your Name and Index Number.");
+      return;
+    }
+
+    studentData.name = nameInput;
+    studentData.indexNumber = indexInput;
+
+    selectedQuestions = generateQuizSet();
+
+    document.getElementById('login-section').classList.add('hidden');
+    document.getElementById('quiz-section').classList.remove('hidden');
+
+    timerInterval = setInterval(updateTimer, 1000);
+    renderQuestion();
+    setupProctoring();
+  }
+
+  // TIMER LOGIC
+  function updateTimer() {
+    timeRemaining--;
+    let mins = Math.floor(timeRemaining / 60);
+    let secs = timeRemaining % 60;
+    document.getElementById('timer-display').innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+
+    if (timeRemaining <= 0) {
+      clearInterval(timerInterval);
+      alert("Time is up! Submitting your viva answers automatically.");
+      finishQuiz("Time Expired");
+    }
+  }
+
+  // TAB SWITCH DETECTOR
+  function setupProctoring() {
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && currentQuestionIndex < selectedQuestions.length) {
+        tabSwitchViolations++;
+        if (tabSwitchViolations === 1) {
+          document.getElementById('warning-banner').style.display = 'block';
+        } else if (tabSwitchViolations >= 2) {
+          clearInterval(timerInterval);
+          alert("Multiple tab switches detected! Your viva is being automatically submitted.");
+          finishQuiz("Auto-submitted: Tab Switch Violation");
+        }
+      }
+    });
+  }
+
+  // RENDER QUESTION
+  function renderQuestion() {
+    const q = selectedQuestions[currentQuestionIndex];
+    const container = document.getElementById('question-container');
+    document.getElementById('question-progress').innerText = `Question ${currentQuestionIndex + 1} of 10`;
+
+    let html = `<h3 style="margin-bottom: 15px; font-size: 1.1rem;">${currentQuestionIndex + 1}. ${q.q}</h3>`;
+
+    if (q.type === 'mcq') {
+      html += `<ul class="options-list">`;
+      q.options.forEach((opt, idx) => {
+        html += `
+          <label class="option-item">
+            <input type="radio" name="mcq_option" value="${idx}">
+            <span>${opt}</span>
+          </label>`;
+      });
+      html += `</ul>`;
+    } else {
+      html += `
+        <textarea id="typed-answer" placeholder="Type your concise answer here..." oninput="checkWordCount(${q.maxWords})"></textarea>
+        <div class="word-count" id="word-count-display">Words: 0 / ${q.maxWords}</div>`;
+    }
+
+    container.innerHTML = html;
+
+    if (currentQuestionIndex === selectedQuestions.length - 1) {
+      document.getElementById('next-btn').innerText = "Submit Viva";
+    }
+  }
+
+  // WORD COUNT ENFORCEMENT
+  function checkWordCount(maxWords) {
+    const textarea = document.getElementById('typed-answer');
+    const words = textarea.value.trim().split(/\s+/).filter(w => w.length > 0);
+    document.getElementById('word-count-display').innerText = `Words: ${words.length} / ${maxWords}`;
+    if (words.length > maxWords) {
+      document.getElementById('word-count-display').style.color = 'red';
+    } else {
+      document.getElementById('word-count-display').style.color = '#64748b';
+    }
+  }
+
+  // NEXT QUESTION & EVALUATION
+  function nextQuestion() {
+    const q = selectedQuestions[currentQuestionIndex];
+
+    if (q.type === 'mcq') {
+      const selected = document.querySelector('input[name="mcq_option"]:checked');
+      if (!selected) {
+        alert("Please select an answer before proceeding.");
+        return;
+      }
+      if (parseInt(selected.value) === q.correct) {
+        totalScore += 1;
+      }
+    } else {
+      const textarea = document.getElementById('typed-answer');
+      const text = textarea.value.trim().toLowerCase();
+      const words = text.split(/\s+/).filter(w => w.length > 0);
+
+      if (words.length === 0) {
+        alert("Please type your answer before proceeding.");
+        return;
+      }
+
+      if (words.length > q.maxWords) {
+        alert(`Please keep your answer within the ${q.maxWords} word limit.`);
+        return;
+      }
+
+      // Keyword evaluation
+      let matched = 0;
+      q.keywords.forEach(kw => {
+        if (text.includes(kw.toLowerCase())) matched++;
+      });
+
+      const matchRatio = matched / q.keywords.length;
+      if (matchRatio >= 0.5) {
+        totalScore += (matchRatio >= 0.75) ? 1 : 0.5;
+      }
+    }
+
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < selectedQuestions.length) {
+      renderQuestion();
+    } else {
+      clearInterval(timerInterval);
+      finishQuiz("Normal Submission");
+    }
+  }
+
+  // SUBMIT & STORE MARKS
+  function finishQuiz(statusReason) {
+    document.getElementById('quiz-section').classList.add('hidden');
+    document.getElementById('result-section').classList.remove('hidden');
+
+    const finalMarks = Math.min(10, Math.round(totalScore * 10) / 10);
+    const percentage = Math.round((finalMarks / 10) * 100);
+    const timeSpentSeconds = 600 - timeRemaining;
+    const timeSpentStr = `${Math.floor(timeSpentSeconds / 60)}m ${timeSpentSeconds % 60}s`;
+
+    document.getElementById('final-score').innerText = `${finalMarks} / 10`;
+    document.getElementById('score-percentage').innerText = `Score: ${percentage}%`;
+
+    const payload = {
+      indexNumber: studentData.indexNumber,
+      name: studentData.name,
+      score: finalMarks,
+      total: 10,
+      percentage: percentage,
+      timeSpent: timeSpentStr,
+      violations: tabSwitchViolations
+    };
+
+    fetch(GOOGLE_SHEET_WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      document.getElementById('submission-status').innerText = "✔ Marks successfully saved to Google Sheet.";
+    })
+    .catch(err => {
+      document.getElementById('submission-status').innerText = "⚠ Submitted, but could not connect to Google Sheet.";
+    });
+  }
+</script>
+
+</body>
+</html>
