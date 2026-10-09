@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ET2402 Practical Assessment</title>
-
+  <title>Online Viva & Quiz Assessment</title>
   <style>
     :root {
       --primary: #2563eb;
@@ -17,12 +16,7 @@
       --success: #22c55e;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
     body {
       background-color: var(--bg);
@@ -73,30 +67,15 @@
       display: none;
     }
 
-    h2 {
-      font-size: 1.4rem;
-      margin-bottom: 15px;
-      color: #0f172a;
-    }
-
-    h3 {
-      line-height: 1.5;
-    }
+    h2 { font-size: 1.4rem; margin-bottom: 15px; color: #0f172a; }
 
     .form-group {
       margin-bottom: 18px;
     }
 
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
+    label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; }
 
-    input[type="text"],
-    input[type="password"],
-    textarea {
+    input[type="text"], input[type="password"], textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid var(--border);
@@ -106,16 +85,11 @@
       transition: border 0.2s;
     }
 
-    input[type="text"]:focus,
-    input[type="password"]:focus,
-    textarea:focus {
+    input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
       border-color: var(--primary);
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
+    textarea { resize: vertical; min-height: 100px; }
 
     .btn {
       width: 100%;
@@ -130,9 +104,7 @@
       transition: background 0.2s;
     }
 
-    .btn:hover {
-      background: var(--primary-hover);
-    }
+    .btn:hover { background: var(--primary-hover); }
 
     .btn-secondary {
       background: #f1f5f9;
@@ -141,9 +113,7 @@
       margin-top: 10px;
     }
 
-    .btn-secondary:hover {
-      background: #e2e8f0;
-    }
+    .btn-secondary:hover { background: #e2e8f0; }
 
     .qr-box {
       text-align: center;
@@ -162,10 +132,7 @@
       border-radius: 6px;
     }
 
-    .options-list {
-      list-style: none;
-      margin-top: 10px;
-    }
+    .options-list { list-style: none; margin-top: 10px; }
 
     .option-item {
       margin-bottom: 10px;
@@ -178,14 +145,9 @@
       transition: background 0.2s;
     }
 
-    .option-item:hover {
-      background: #f1f5f9;
-    }
+    .option-item:hover { background: #f1f5f9; }
 
-    .option-item input {
-      margin-right: 12px;
-      accent-color: var(--primary);
-    }
+    .option-item input { margin-right: 12px; accent-color: var(--primary); }
 
     .word-count {
       text-align: right;
@@ -212,1193 +174,364 @@
       margin: 10px 0;
     }
 
-    .info-box {
-      background: #eff6ff;
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 18px;
-      font-size: 0.85rem;
-      color: #1e40af;
-    }
-
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
   </style>
 </head>
-
 <body>
 
 <div class="container">
-
-  <!-- ================= LOGIN SECTION ================= -->
-
+  
+  <!-- LOGIN SECTION -->
   <div id="login-section">
-
-    <h2>ET2402 Practical Assessment</h2>
-
+    <h2>Student Viva Registration</h2>
     <div class="form-group">
       <label for="student-name">Full Name:</label>
-      <input
-        type="text"
-        id="student-name"
-        placeholder="Enter your full name"
-        required
-      >
+      <input type="text" id="student-name" placeholder="Enter your full name" required>
     </div>
-
     <div class="form-group">
       <label for="student-index">Index / Student Number:</label>
-      <input
-        type="text"
-        id="student-index"
-        placeholder="e.g., IT2024001"
-        required
-      >
+      <input type="text" id="student-index" placeholder="e.g., IT2024001" required>
     </div>
-
     <div class="form-group">
       <label for="instructor-password">Instructor Passcode / PIN:</label>
-      <input
-        type="password"
-        id="instructor-password"
-        placeholder="Enter instructor passcode to start"
-        required
-      >
+      <input type="password" id="instructor-password" placeholder="Enter instructor passcode to start" required>
     </div>
-
-    <div class="info-box">
-      <strong>Assessment Rules:</strong>
-
+    
+    <div style="background: #eff6ff; padding: 12px; border-radius: 6px; margin-bottom: 18px; font-size: 0.85rem; color: #1e40af;">
+      <strong>Rules & Instructions:</strong>
       <ul style="margin-left: 18px; margin-top: 5px;">
-        <li>10 questions in total.</li>
-        <li>7 MCQ questions.</li>
-        <li>3 practical questions.</li>
-        <li>Questions are based on the ET2402 practical board.</li>
-        <li>Time limit: 10 minutes.</li>
-        <li>No going back after clicking Next.</li>
-        <li>Two tab switches will automatically submit the test.</li>
+        <li>10 Random Questions (6 MCQ + 4 Short Answer).</li>
+        <li>Time Limit: Exactly 10 minutes.</li>
+        <li>No going back once you click "Next".</li>
+        <li>Switching tabs/windows twice auto-submits the test.</li>
       </ul>
     </div>
 
-    <button class="btn" onclick="startViva()">
-      Start Assessment
-    </button>
+    <button class="btn" onclick="startViva()">Start Assessment</button>
+    <button class="btn btn-secondary" onclick="toggleQRCode()">📱 Show/Hide Join QR Code</button>
 
-    <button class="btn btn-secondary" onclick="toggleQRCode()">
-      📱 Show / Hide Join QR Code
-    </button>
-
+    <!-- QR CODE CONTAINER FOR CLASSROOM PROJECTOR -->
     <div id="qr-box" class="qr-box">
-
-      <p style="font-size: 0.85rem; font-weight: 600; color: #475569;">
-        Scan QR Code to Join Assessment
-      </p>
-
-      <img id="qr-img" src="" alt="QR Code">
-
+      <p style="font-size: 0.85rem; font-weight: 600; color: #475569;">Scan QR Code to Join Viva on Mobile:</p>
+      <img id="qr-img" src="" alt="Quiz QR Code">
     </div>
-
   </div>
 
-
-  <!-- ================= QUIZ SECTION ================= -->
-
+  <!-- VIVA QUIZ SECTION -->
   <div id="quiz-section" class="hidden">
-
     <div class="header-bar">
-
-      <span
-        class="progress-text"
-        id="question-progress"
-      >
-        Question 1 of 10
-      </span>
-
-      <span
-        class="timer-badge"
-        id="timer-display"
-      >
-        10:00
-      </span>
-
+      <span class="progress-text" id="question-progress">Question 1 of 10</span>
+      <span class="timer-badge" id="timer-display">10:00</span>
     </div>
-
 
     <div id="warning-banner" class="warning-banner">
-
-      ⚠️ <strong>Warning:</strong>
-      Tab switching detected!
-
-      A second violation will automatically submit your assessment.
-
+      ⚠️ <strong>Warning:</strong> Tab switching detected! A second violation will automatically submit your test.
     </div>
-
 
     <div id="question-container">
-      <!-- Question will appear here -->
+      <!-- Dynamic Question Content -->
     </div>
-
 
     <div style="margin-top: 20px;">
-
-      <button
-        class="btn"
-        id="next-btn"
-        onclick="nextQuestion()"
-      >
-        Next Question
-      </button>
-
+      <button class="btn" id="next-btn" onclick="nextQuestion()">Next Question</button>
     </div>
-
   </div>
 
-
-  <!-- ================= RESULT SECTION ================= -->
-
+  <!-- RESULT SECTION -->
   <div id="result-section" class="hidden">
-
     <div class="score-box">
-
-      <h2>Assessment Completed</h2>
-
-      <p style="color: #64748b;">
-        Your response has been recorded and submitted.
-      </p>
-
-      <div
-        class="score-number"
-        id="final-score"
-      >
-        0 / 10
-      </div>
-
-      <p
-        id="score-percentage"
-        style="font-weight: 600; font-size: 1.1rem; color: #334155;"
-      ></p>
-
-      <p
-        id="submission-status"
-        style="margin-top: 15px; font-size: 0.85rem; color: #059669;"
-      ></p>
-
-
-      <button
-        class="btn btn-secondary"
-        onclick="resetForNextStudent()"
-        style="margin-top: 20px;"
-      >
-        🔄 Start Next Student's Assessment
-      </button>
-
+      <h2>Viva Completed</h2>
+      <p style="color: #64748b;">Your response has been recorded and submitted.</p>
+      <div class="score-number" id="final-score">0 / 10</div>
+      <p id="score-percentage" style="font-weight: 600; font-size: 1.1rem; color: #334155;"></p>
+      <p id="submission-status" style="margin-top: 15px; font-size: 0.85rem; color: #059669;"></p>
+      
+      <!-- BUTTON TO RESET PAGE FOR NEXT PRACTICAL STUDENT -->
+      <button class="btn btn-secondary" onclick="resetForNextStudent()" style="margin-top: 20px;">🔄 Start Next Student's Assessment</button>
     </div>
-
   </div>
 
 </div>
 
-
 <script>
-
-  /* ============================================================
-     INSTRUCTOR PASSWORD
-     ============================================================ */
-
+  // SET YOUR INSTRUCTOR PASSWORD HERE
   const INSTRUCTOR_PASSWORD = "21472";
 
+  // DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+  const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxEqGPFSQTj_gmuPP5UwW2J5LbpQMNd3LdWziOeJY4PR8mMmoCJZusnZh9A6dZpHW2H/exec";
 
-  /* ============================================================
-     GOOGLE SHEET WEB APP
-     Keep your existing deployed URL
-     ============================================================ */
-
-  const GOOGLE_SHEET_WEB_APP_URL =
-    "https://script.google.com/macros/s/AKfycbxEqGPFSQTj_gmuPP5UwW2J5LbpQMNd3LdWziOeJY4PR8mMmoCJZusnZh9A6dZpHW2H/exec";
-
-
-  /* ============================================================
-     QUESTION BANK
-     
-     EXACTLY:
-     7 MCQs
-     3 PRACTICAL QUESTIONS
-     
-     Questions are based on the MCM40 practical.
-     ============================================================ */
-
+  // 25 QUESTION BANK (50% Hard Questions | Data Comm & Networking Topic Focus)
   const questionBank = [
+    // MCQs (15 Questions)
+    { id: 1, type: 'mcq', diff: 'hard', q: "In Manchester (IEEE 802.3) encoding, how is a binary '1' represented?", options: ["Falling edge at mid-bit", "Rising edge at mid-bit", "Constant high level", "No transition"], correct: 1 },
+    { id: 2, type: 'mcq', diff: 'hard', q: "Why is NRZ encoding unsuitable for clock synchronization over long sequences of identical bits?", options: ["High optical power required", "Lacks spectral transition components for PLL locking", "Doubles transmission bandwidth", "Causes DC bias instability"], correct: 1 },
+    { id: 3, type: 'mcq', diff: 'hard', q: "In Bi-Phase Mark (Bi-Phase M) encoding, when does a signal transition occur?", options: ["Only at mid-bit for '0'", "Always at bit start, and mid-bit if data is '1'", "Always at bit start, and mid-bit if data is '0'", "Only at bit boundaries"], correct: 1 },
+    { id: 4, type: 'mcq', diff: 'medium', q: "What effect does increasing Signal-to-Noise Ratio (SNR) have on Bit Error Rate (BER)?", options: ["Increases BER", "Decreases BER", "Has no effect on BER", "BER becomes zero immediately"], correct: 1 },
+    { id: 5, type: 'mcq', diff: 'medium', q: "Which pin on a standard DE-9 serial port carries Transmitted Data (TD)?", options: ["Pin 2", "Pin 3", "Pin 5", "Pin 7"], correct: 1 },
+    { id: 6, type: 'mcq', diff: 'hard', q: "In Bi-Phase Space (Bi-Phase S) encoding, mid-bit transition occurs when the data bit is:", options: ["Logic 1", "Logic 0", "Both 0 and 1", "Neither"], correct: 1 },
+    { id: 7, type: 'mcq', diff: 'hard', q: "What are the standard RS-232 voltage levels for Logic 0 (Space) and Logic 1 (Mark)?", options: ["0V and +5V", "+3V to +15V (Space) and -3V to -15V (Mark)", "-3V to -15V (Space) and +3V to +15V (Mark)", "+12V and 0V"], correct: 1 },
+    { id: 8, type: 'mcq', diff: 'medium', q: "What is a major advantage of Manchester encoding over NRZ?", options: ["Requires lower bandwidth", "Self-clocking with zero DC bias component", "Eliminates attenuation", "Allows parallel transfer"], correct: 1 },
+    { id: 9, type: 'mcq', diff: 'medium', q: "In asynchronous serial transmission, what alerts the receiver of incoming data?", options: ["Parity Bit", "Stop Bit", "Start Bit", "Clock Pulse"], correct: 2 },
+    { id: 10, type: 'mcq', diff: 'hard', q: "What component converts optical pulses into voltage in an optical receiver?", options: ["Line Driver", "Trans-impedance Amplifier", "BIAS Trimmer", "Phase Locked Loop"], correct: 1 },
+    { id: 11, type: 'mcq', diff: 'medium', q: "Which change allows an increased data rate without degrading BER?", options: ["Decreasing Bandwidth", "Increasing Channel Bandwidth & SNR", "Lowering signal power", "Extending bit interval"], correct: 1 },
+    { id: 12, type: 'mcq', diff: 'medium', q: "Which encoding method is used in 10BASE-T Ethernet?", options: ["NRZ-L", "Manchester", "Bi-Phase Space", "4B5B"], correct: 1 },
+    { id: 13, type: 'mcq', diff: 'hard', q: "What occurs if receiver and transmitter clocks misalign in NRZ transmission?", options: ["Automatic re-sync", "Bit slip errors over consecutive identical bits", "Inverted polarity", "Signal suppression"], correct: 1 },
+    { id: 14, type: 'mcq', diff: 'hard', q: "What is the primary role of the BIAS trimmer in an optical transmitter circuit?", options: ["Clock recovery", "Sets the optical LED DC operating bias current", "RS-232 level shifting", "Sampling clock adjustment"], correct: 1 },
+    { id: 15, type: 'mcq', diff: 'hard', q: "How does synchronous transmission differ from asynchronous serial transmission?", options: ["Uses fiber optics", "Uses continuous shared timing/clock rather than start/stop bits", "Limited to 19200 bps", "Cannot send binary text"], correct: 1 },
 
-    /* ==========================================================
-       MCQ 1
-       ========================================================== */
-
-    {
-      id: 1,
-      type: "mcq",
-
-      q: "Which test point is used to observe the transmitted data signal?",
-
-      options: [
-        "TP15",
-        "TP17",
-        "TP20",
-        "TP28"
-      ],
-
-      correct: 1
-    },
-
-
-    /* ==========================================================
-       MCQ 2
-       ========================================================== */
-
-    {
-      id: 2,
-      type: "mcq",
-
-      q: "Which test point is used to observe the transmission clock?",
-
-      options: [
-        "TP17",
-        "TP18",
-        "TP20",
-        "TP25"
-      ],
-
-      correct: 1
-    },
-
-
-    /* ==========================================================
-       MCQ 3
-       ========================================================== */
-
-    {
-      id: 3,
-      type: "mcq",
-
-      q: "When the trainer is set to Manchester mode, where is the Manchester TTL coded signal observed?",
-
-      options: [
-        "TP15",
-        "TP18",
-        "TP20",
-        "TP27"
-      ],
-
-      correct: 2
-    },
-
-
-    /* ==========================================================
-       MCQ 4
-       ========================================================== */
-
-    {
-      id: 4,
-      type: "mcq",
-
-      q: "Which component is used to transmit the optical signal in the practical?",
-
-      options: [
-        "Photodiode",
-        "LED",
-        "Oscilloscope",
-        "Line Driver"
-      ],
-
-      correct: 1
-    },
-
-
-    /* ==========================================================
-       MCQ 5
-       ========================================================== */
-
-    {
-      id: 5,
-      type: "mcq",
-
-      q: "Which component detects the optical signal at the receiver?",
-
-      options: [
-        "LED",
-        "Photodiode",
-        "BIAS Trimmer",
-        "Line Receiver"
-      ],
-
-      correct: 1
-    },
-
-
-    /* ==========================================================
-       MCQ 6
-       ========================================================== */
-
-    {
-      id: 6,
-      type: "mcq",
-
-      q: "In the PC data transmission practical, what is the maximum speed set in the terminal software?",
-
-      options: [
-        "9600 bps",
-        "1200 bps",
-        "19200 bps",
-        "38400 bps"
-      ],
-
-      correct: 2
-    },
-
-
-    /* ==========================================================
-       MCQ 7
-       ========================================================== */
-
-    {
-      id: 7,
-      type: "mcq",
-
-      q: "Which test point shows the received data signal in TTL format during PC transmission?",
-
-      options: [
-        "TP21",
-        "TP17",
-        "TP27",
-        "TP22"
-      ],
-
-      correct: 2
-    },
-
-
-    /* ==========================================================
-       PRACTICAL QUESTION 1
-       ========================================================== */
-
-    {
-      id: 8,
-
-      type: "typed",
-
-      q: "On the trainer board, if you want to observe the transmitted data and transmission clock using the oscilloscope, which test points do you use?",
-
-      keywords: [
-        "TP17",
-        "TP18"
-      ],
-
-      maxWords: 30
-    },
-
-
-    /* ==========================================================
-       PRACTICAL QUESTION 2
-       ========================================================== */
-
-    {
-      id: 9,
-
-      type: "typed",
-
-      q: "During optical data transmission, what are TP24, TP25 and TP27 used for?",
-
-      keywords: [
-        "TP24",
-        "photodiode",
-        "TP25",
-        "received",
-        "TTL",
-        "TP27",
-        "data"
-      ],
-
-      maxWords: 50
-    },
-
-
-    /* ==========================================================
-       PRACTICAL QUESTION 3
-       ========================================================== */
-
-    {
-      id: 10,
-
-      type: "typed",
-
-      q: "During PC serial transmission, what signals are observed at TP21, TP17, TP27 and TP22?",
-
-      keywords: [
-        "TP21",
-        "RS232",
-        "TP17",
-        "TTL",
-        "TP27",
-        "received",
-        "TP22",
-        "RS232"
-      ],
-
-      maxWords: 60
-    }
-
+    // SHORT ANSWER / TYPED QUESTIONS (10 Questions)
+    { id: 16, type: 'typed', diff: 'medium', q: "Explain why Manchester encoding is considered 'self-clocking'.", keywords: ["transition", "mid", "clock", "sync"], maxWords: 35 },
+    { id: 17, type: 'typed', diff: 'hard', q: "Describe the function of line receivers and line drivers in RS-232 to TTL conversion.", keywords: ["voltage", "ttl", "convert", "rs232", "level"], maxWords: 40 },
+    { id: 18, type: 'typed', diff: 'medium', q: "What causes optical signal attenuation in optical fiber transmission?", keywords: ["loss", "attenuation", "dispersion", "coupling", "fiber"], maxWords: 35 },
+    { id: 19, type: 'typed', diff: 'hard', q: "Explain the role of a Phase Locked Loop (PLL) in a digital data receiver.", keywords: ["clock", "phase", "sync", "lock", "frequency"], maxWords: 35 },
+    { id: 20, type: 'typed', diff: 'hard', q: "Distinguish between Bi-Phase Mark (Bi-Phase M) and Bi-Phase Space (Bi-Phase S).", keywords: ["mark", "space", "transition", "middle", "start"], maxWords: 40 },
+    { id: 21, type: 'typed', diff: 'medium', q: "List four core parameters required to configure serial terminal communication.", keywords: ["baud", "rate", "parity", "stop", "flow"], maxWords: 30 },
+    { id: 22, type: 'typed', diff: 'hard', q: "How does increasing bandwidth affect channel capacity according to Shannon-Nyquist theorem?", keywords: ["capacity", "bandwidth", "rate", "increase", "data"], maxWords: 35 },
+    { id: 23, type: 'typed', diff: 'medium', q: "Why are start and stop bits essential in asynchronous framing?", keywords: ["sync", "frame", "start", "stop", "timing"], maxWords: 35 },
+    { id: 24, type: 'typed', diff: 'hard', q: "Describe how a photodiode and trans-impedance amplifier convert optical signals.", keywords: ["light", "current", "voltage", "photodiode", "amp"], maxWords: 40 },
+    { id: 25, type: 'typed', diff: 'hard', q: "Why is the absence of a DC component advantageous in line codes like Manchester?", keywords: ["dc", "ac", "coupling", "transformer", "bias"], maxWords: 35 }
   ];
 
-
-  /* ============================================================
-     STATE VARIABLES
-     ============================================================ */
-
-  let studentData = {
-    name: "",
-    indexNumber: ""
-  };
-
+  // STATE VARIABLES
+  let studentData = { name: '', indexNumber: '' };
   let selectedQuestions = [];
-
   let currentQuestionIndex = 0;
-
   let totalScore = 0;
-
-  let timeRemaining = 600;
-
+  let timeRemaining = 600; // 10 mins
   let timerInterval = null;
-
   let tabSwitchViolations = 0;
 
-
-  /* ============================================================
-     QR CODE
-     ============================================================ */
-
+  // TOGGLE & GENERATE QR CODE AUTOMATICALLY
   function toggleQRCode() {
-
-    const qrBox = document.getElementById("qr-box");
-
-    const qrImg = document.getElementById("qr-img");
-
-    if (qrBox.style.display === "block") {
-
-      qrBox.style.display = "none";
-
+    const qrBox = document.getElementById('qr-box');
+    const qrImg = document.getElementById('qr-img');
+    
+    if (qrBox.style.display === 'block') {
+      qrBox.style.display = 'none';
     } else {
-
       const currentURL = window.location.href;
-
-      qrImg.src =
-        "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
-        encodeURIComponent(currentURL);
-
-      qrBox.style.display = "block";
+      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentURL)}`;
+      qrBox.style.display = 'block';
     }
   }
 
-
-  /* ============================================================
-     GENERATE QUIZ
-     
-     EXACTLY 7 MCQs + 3 PRACTICAL QUESTIONS
-     ============================================================ */
-
+  // RANDOM SELECTION: 6 MCQs + 4 TYPED QUESTIONS
   function generateQuizSet() {
-
-    const mcqs = questionBank
-      .filter(q => q.type === "mcq")
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 7);
-
-
-    const practicalQuestions = questionBank
-      .filter(q => q.type === "typed")
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
-
-
-    return [...mcqs, ...practicalQuestions]
-      .sort(() => 0.5 - Math.random());
+    const mcqs = questionBank.filter(q => q.type === 'mcq').sort(() => 0.5 - Math.random()).slice(0, 6);
+    const typeds = questionBank.filter(q => q.type === 'typed').sort(() => 0.5 - Math.random()).slice(0, 4);
+    return [...mcqs, ...typeds].sort(() => 0.5 - Math.random());
   }
 
-
-  /* ============================================================
-     START ASSESSMENT
-     ============================================================ */
-
+  // START VIVA (WITH PASSWORD CHECK)
   function startViva() {
-
-    const nameInput =
-      document.getElementById("student-name").value.trim();
-
-    const indexInput =
-      document.getElementById("student-index").value.trim();
-
-    const passwordInput =
-      document.getElementById("instructor-password").value.trim();
-
+    const nameInput = document.getElementById('student-name').value.trim();
+    const indexInput = document.getElementById('student-index').value.trim();
+    const passwordInput = document.getElementById('instructor-password').value.trim();
 
     if (!nameInput || !indexInput) {
-
-      alert(
-        "Please enter both your Name and Index Number."
-      );
-
+      alert("Please enter both your Name and Index Number.");
       return;
     }
-
 
     if (passwordInput !== INSTRUCTOR_PASSWORD) {
-
-      alert(
-        "❌ Invalid Instructor Passcode!"
-      );
-
+      alert("❌ Invalid Instructor Passcode! Please ask the lecturer/instructor to authorize your test.");
       return;
     }
 
-
     studentData.name = nameInput;
-
     studentData.indexNumber = indexInput;
-
 
     selectedQuestions = generateQuizSet();
 
+    document.getElementById('login-section').classList.add('hidden');
+    document.getElementById('quiz-section').classList.remove('hidden');
 
-    currentQuestionIndex = 0;
-
-    totalScore = 0;
-
-    timeRemaining = 600;
-
-    tabSwitchViolations = 0;
-
-
-    document
-      .getElementById("login-section")
-      .classList.add("hidden");
-
-
-    document
-      .getElementById("quiz-section")
-      .classList.remove("hidden");
-
-
-    timerInterval =
-      setInterval(updateTimer, 1000);
-
-
+    timerInterval = setInterval(updateTimer, 1000);
     renderQuestion();
-
-
     setupProctoring();
   }
 
-
-  /* ============================================================
-     TIMER
-     ============================================================ */
-
+  // TIMER LOGIC
   function updateTimer() {
-
     timeRemaining--;
-
-
-    let mins =
-      Math.floor(timeRemaining / 60);
-
-    let secs =
-      timeRemaining % 60;
-
-
-    document.getElementById(
-      "timer-display"
-    ).innerText =
-      `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-
+    let mins = Math.floor(timeRemaining / 60);
+    let secs = timeRemaining % 60;
+    document.getElementById('timer-display').innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 
     if (timeRemaining <= 0) {
-
       clearInterval(timerInterval);
-
-      alert(
-        "Time is up! Submitting your assessment."
-      );
-
+      alert("Time is up! Submitting your viva answers automatically.");
       finishQuiz("Time Expired");
     }
   }
 
-
-  /* ============================================================
-     TAB SWITCH DETECTION
-     ============================================================ */
-
+  // TAB SWITCH DETECTOR
   function setupProctoring() {
-
-    document.addEventListener(
-      "visibilitychange",
-      handleVisibilityChange
-    );
-  }
-
-
-  function handleVisibilityChange() {
-
-    if (
-      document.hidden &&
-      currentQuestionIndex <
-      selectedQuestions.length
-    ) {
-
-      tabSwitchViolations++;
-
-
-      if (tabSwitchViolations === 1) {
-
-        document.getElementById(
-          "warning-banner"
-        ).style.display = "block";
-
-      } else if (tabSwitchViolations >= 2) {
-
-        clearInterval(timerInterval);
-
-
-        alert(
-          "Multiple tab switches detected! " +
-          "Your assessment is being automatically submitted."
-        );
-
-
-        finishQuiz(
-          "Auto-submitted: Tab Switch Violation"
-        );
-      }
-    }
-  }
-
-
-  /* ============================================================
-     RENDER QUESTION
-     ============================================================ */
-
-  function renderQuestion() {
-
-    const q =
-      selectedQuestions[currentQuestionIndex];
-
-
-    const container =
-      document.getElementById(
-        "question-container"
-      );
-
-
-    document.getElementById(
-      "question-progress"
-    ).innerText =
-      `Question ${currentQuestionIndex + 1} of 10`;
-
-
-    let html = `
-
-      <h3 style="
-        margin-bottom: 15px;
-        font-size: 1.1rem;
-      ">
-        ${currentQuestionIndex + 1}. ${q.q}
-      </h3>
-
-    `;
-
-
-    /* ================= MCQ ================= */
-
-    if (q.type === "mcq") {
-
-      html += `
-        <ul class="options-list">
-      `;
-
-
-      q.options.forEach(
-        (option, index) => {
-
-          html += `
-
-            <label class="option-item">
-
-              <input
-                type="radio"
-                name="mcq_option"
-                value="${index}"
-              >
-
-              <span>
-                ${option}
-              </span>
-
-            </label>
-
-          `;
-        }
-      );
-
-
-      html += `
-        </ul>
-      `;
-
-    }
-
-
-    /* ================= PRACTICAL ================= */
-
-    else {
-
-      html += `
-
-        <textarea
-          id="typed-answer"
-          placeholder="Type your practical answer here..."
-          oninput="checkWordCount(${q.maxWords})"
-        ></textarea>
-
-        <div
-          class="word-count"
-          id="word-count-display"
-        >
-          Words: 0 / ${q.maxWords}
-        </div>
-
-      `;
-    }
-
-
-    container.innerHTML = html;
-
-
-    if (
-      currentQuestionIndex ===
-      selectedQuestions.length - 1
-    ) {
-
-      document.getElementById(
-        "next-btn"
-      ).innerText = "Submit Assessment";
-
-    } else {
-
-      document.getElementById(
-        "next-btn"
-      ).innerText = "Next Question";
-    }
-  }
-
-
-  /* ============================================================
-     WORD COUNT
-     ============================================================ */
-
-  function checkWordCount(maxWords) {
-
-    const textarea =
-      document.getElementById(
-        "typed-answer"
-      );
-
-
-    const words =
-      textarea.value
-        .trim()
-        .split(/\s+/)
-        .filter(word => word.length > 0);
-
-
-    document.getElementById(
-      "word-count-display"
-    ).innerText =
-      `Words: ${words.length} / ${maxWords}`;
-
-
-    if (words.length > maxWords) {
-
-      document.getElementById(
-        "word-count-display"
-      ).style.color = "red";
-
-    } else {
-
-      document.getElementById(
-        "word-count-display"
-      ).style.color = "#64748b";
-    }
-  }
-
-
-  /* ============================================================
-     CHECK PRACTICAL ANSWER
-     ============================================================ */
-
-  function evaluatePracticalAnswer(q, text) {
-
-    let matched = 0;
-
-
-    q.keywords.forEach(
-      keyword => {
-
-        if (
-          text.includes(
-            keyword.toLowerCase()
-          )
-        ) {
-
-          matched++;
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && currentQuestionIndex < selectedQuestions.length) {
+        tabSwitchViolations++;
+        if (tabSwitchViolations === 1) {
+          document.getElementById('warning-banner').style.display = 'block';
+        } else if (tabSwitchViolations >= 2) {
+          clearInterval(timerInterval);
+          alert("Multiple tab switches detected! Your viva is being automatically submitted.");
+          finishQuiz("Auto-submitted: Tab Switch Violation");
         }
       }
-    );
-
-
-    const matchRatio =
-      matched / q.keywords.length;
-
-
-    /*
-      Practical question marking:
-
-      75% or more keywords = 1 mark
-      50% or more keywords = 0.5 mark
-      Less than 50% = 0
-    */
-
-    if (matchRatio >= 0.75) {
-
-      return 1;
-
-    } else if (matchRatio >= 0.50) {
-
-      return 0.5;
-
-    } else {
-
-      return 0;
-    }
-  }
-
-
-  /* ============================================================
-     NEXT QUESTION
-     ============================================================ */
-
-  function nextQuestion() {
-
-    const q =
-      selectedQuestions[currentQuestionIndex];
-
-
-    /* ================= MCQ ================= */
-
-    if (q.type === "mcq") {
-
-      const selected =
-        document.querySelector(
-          'input[name="mcq_option"]:checked'
-        );
-
-
-      if (!selected) {
-
-        alert(
-          "Please select an answer before proceeding."
-        );
-
-        return;
-      }
-
-
-      if (
-        parseInt(selected.value) ===
-        q.correct
-      ) {
-
-        totalScore += 1;
-      }
-
-    }
-
-
-    /* ================= PRACTICAL ================= */
-
-    else {
-
-      const textarea =
-        document.getElementById(
-          "typed-answer"
-        );
-
-
-      const text =
-        textarea.value
-          .trim()
-          .toLowerCase();
-
-
-      const words =
-        text
-          .split(/\s+/)
-          .filter(word => word.length > 0);
-
-
-      if (words.length === 0) {
-
-        alert(
-          "Please type your practical answer before proceeding."
-        );
-
-        return;
-      }
-
-
-      if (words.length > q.maxWords) {
-
-        alert(
-          `Please keep your answer within ${q.maxWords} words.`
-        );
-
-        return;
-      }
-
-
-      totalScore +=
-        evaluatePracticalAnswer(
-          q,
-          text
-        );
-    }
-
-
-    currentQuestionIndex++;
-
-
-    if (
-      currentQuestionIndex <
-      selectedQuestions.length
-    ) {
-
-      renderQuestion();
-
-    } else {
-
-      clearInterval(timerInterval);
-
-      finishQuiz(
-        "Normal Submission"
-      );
-    }
-  }
-
-
-  /* ============================================================
-     FINISH QUIZ
-     ============================================================ */
-
-  function finishQuiz(statusReason) {
-
-    clearInterval(timerInterval);
-
-
-    document
-      .getElementById("quiz-section")
-      .classList.add("hidden");
-
-
-    document
-      .getElementById("result-section")
-      .classList.remove("hidden");
-
-
-    const finalMarks =
-      Math.min(
-        10,
-        Math.round(totalScore * 10) / 10
-      );
-
-
-    const percentage =
-      Math.round(
-        (finalMarks / 10) * 100
-      );
-
-
-    const timeSpentSeconds =
-      600 - timeRemaining;
-
-
-    const timeSpentStr =
-      `${Math.floor(timeSpentSeconds / 60)}m ` +
-      `${timeSpentSeconds % 60}s`;
-
-
-    document.getElementById(
-      "final-score"
-    ).innerText =
-      `${finalMarks} / 10`;
-
-
-    document.getElementById(
-      "score-percentage"
-    ).innerText =
-      `Score: ${percentage}%`;
-
-
-    const payload = {
-
-      indexNumber:
-        studentData.indexNumber,
-
-      name:
-        studentData.name,
-
-      score:
-        finalMarks,
-
-      total:
-        10,
-
-      percentage:
-        percentage,
-
-      timeSpent:
-        timeSpentStr,
-
-      violations:
-        tabSwitchViolations,
-
-      status:
-        statusReason
-    };
-
-
-    /* ========================================================
-       SAVE RESULT TO GOOGLE SHEET
-       ======================================================== */
-
-    fetch(
-      GOOGLE_SHEET_WEB_APP_URL,
-      {
-
-        method: "POST",
-
-        mode: "no-cors",
-
-        headers: {
-          "Content-Type":
-            "application/json"
-        },
-
-        body:
-          JSON.stringify(payload)
-      }
-    )
-
-    .then(() => {
-
-      document.getElementById(
-        "submission-status"
-      ).innerText =
-        "✔ Marks successfully submitted.";
-
-    })
-
-    .catch(error => {
-
-      console.error(error);
-
-      document.getElementById(
-        "submission-status"
-      ).innerText =
-        "⚠ Assessment completed, but connection to Google Sheet could not be confirmed.";
-
     });
   }
 
+  // RENDER QUESTION
+  function renderQuestion() {
+    const q = selectedQuestions[currentQuestionIndex];
+    const container = document.getElementById('question-container');
+    document.getElementById('question-progress').innerText = `Question ${currentQuestionIndex + 1} of 10`;
 
-  /* ============================================================
-     RESET FOR NEXT STUDENT
-     ============================================================ */
+    let html = `<h3 style="margin-bottom: 15px; font-size: 1.1rem;">${currentQuestionIndex + 1}. ${q.q}</h3>`;
 
-  function resetForNextStudent() {
-
-    studentData = {
-      name: "",
-      indexNumber: ""
-    };
-
-
-    selectedQuestions = [];
-
-    currentQuestionIndex = 0;
-
-    totalScore = 0;
-
-    timeRemaining = 600;
-
-    tabSwitchViolations = 0;
-
-
-    if (timerInterval) {
-
-      clearInterval(timerInterval);
-
-      timerInterval = null;
+    if (q.type === 'mcq') {
+      html += `<ul class="options-list">`;
+      q.options.forEach((opt, idx) => {
+        html += `
+          <label class="option-item">
+            <input type="radio" name="mcq_option" value="${idx}">
+            <span>${opt}</span>
+          </label>`;
+      });
+      html += `</ul>`;
+    } else {
+      html += `
+        <textarea id="typed-answer" placeholder="Type your concise answer here..." oninput="checkWordCount(${q.maxWords})"></textarea>
+        <div class="word-count" id="word-count-display">Words: 0 / ${q.maxWords}</div>`;
     }
 
+    container.innerHTML = html;
 
-    document.getElementById(
-      "student-name"
-    ).value = "";
-
-
-    document.getElementById(
-      "student-index"
-    ).value = "";
-
-
-    document.getElementById(
-      "instructor-password"
-    ).value = "";
-
-
-    document.getElementById(
-      "result-section"
-    ).classList.add("hidden");
-
-
-    document.getElementById(
-      "quiz-section"
-    ).classList.add("hidden");
-
-
-    document.getElementById(
-      "login-section"
-    ).classList.remove("hidden");
-
-
-    document.getElementById(
-      "warning-banner"
-    ).style.display = "none";
-
-
-    document.getElementById(
-      "timer-display"
-    ).innerText = "10:00";
+    if (currentQuestionIndex === selectedQuestions.length - 1) {
+      document.getElementById('next-btn').innerText = "Submit Viva";
+    }
   }
 
+  // WORD COUNT ENFORCEMENT
+  function checkWordCount(maxWords) {
+    const textarea = document.getElementById('typed-answer');
+    const words = textarea.value.trim().split(/\s+/).filter(w => w.length > 0);
+    document.getElementById('word-count-display').innerText = `Words: ${words.length} / ${maxWords}`;
+    if (words.length > maxWords) {
+      document.getElementById('word-count-display').style.color = 'red';
+    } else {
+      document.getElementById('word-count-display').style.color = '#64748b';
+    }
+  }
+
+  // NEXT QUESTION & EVALUATION
+  function nextQuestion() {
+    const q = selectedQuestions[currentQuestionIndex];
+
+    if (q.type === 'mcq') {
+      const selected = document.querySelector('input[name="mcq_option"]:checked');
+      if (!selected) {
+        alert("Please select an answer before proceeding.");
+        return;
+      }
+      if (parseInt(selected.value) === q.correct) {
+        totalScore += 1;
+      }
+    } else {
+      const textarea = document.getElementById('typed-answer');
+      const text = textarea.value.trim().toLowerCase();
+      const words = text.split(/\s+/).filter(w => w.length > 0);
+
+      if (words.length === 0) {
+        alert("Please type your answer before proceeding.");
+        return;
+      }
+
+      if (words.length > q.maxWords) {
+        alert(`Please keep your answer within the ${q.maxWords} word limit.`);
+        return;
+      }
+
+      // Keyword evaluation
+      let matched = 0;
+      q.keywords.forEach(kw => {
+        if (text.includes(kw.toLowerCase())) matched++;
+      });
+
+      const matchRatio = matched / q.keywords.length;
+      if (matchRatio >= 0.5) {
+        totalScore += (matchRatio >= 0.75) ? 1 : 0.5;
+      }
+    }
+
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < selectedQuestions.length) {
+      renderQuestion();
+    } else {
+      clearInterval(timerInterval);
+      finishQuiz("Normal Submission");
+    }
+  }
+
+  // SUBMIT & STORE MARKS
+  function finishQuiz(statusReason) {
+    document.getElementById('quiz-section').classList.add('hidden');
+    document.getElementById('result-section').classList.remove('hidden');
+
+    const finalMarks = Math.min(10, Math.round(totalScore * 10) / 10);
+    const percentage = Math.round((finalMarks / 10) * 100);
+    const timeSpentSeconds = 600 - timeRemaining;
+    const timeSpentStr = `${Math.floor(timeSpentSeconds / 60)}m ${timeSpentSeconds % 60}s`;
+
+    document.getElementById('final-score').innerText = `${finalMarks} / 10`;
+    document.getElementById('score-percentage').innerText = `Score: ${percentage}%`;
+
+    const payload = {
+      indexNumber: studentData.indexNumber,
+      name: studentData.name,
+      score: finalMarks,
+      total: 10,
+      percentage: percentage,
+      timeSpent: timeSpentStr,
+      violations: tabSwitchViolations
+    };
+
+    fetch(GOOGLE_SHEET_WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      document.getElementById('submission-status').innerText = "✔ Marks successfully saved to Google Sheet.";
+    })
+    .catch(err => {
+      document.getElementById('submission-status').innerText = "⚠ Submitted, but could not connect to Google Sheet.";
+    });
+  }
+
+  // RESET PAGE FOR NEXT PRACTICAL STUDENT
+  function resetForNextStudent() {
+    // Reset state variables
+    studentData = { name: '', indexNumber: '' };
+    selectedQuestions = [];
+    currentQuestionIndex = 0;
+    totalScore = 0;
+    timeRemaining = 600;
+    tabSwitchViolations = 0;
+    if (timerInterval) clearInterval(timerInterval);
+
+    // Clear form inputs
+    document.getElementById('student-name').value = '';
+    document.getElementById('student-index').value = '';
+    document.getElementById('instructor-password').value = '';
+
+    // Reset interface visibility
+    document.getElementById('result-section').classList.add('hidden');
+    document.getElementById('warning-banner').style.display = 'none';
+    document.getElementById('login-section').classList.remove('hidden');
+  }
 </script>
 
 </body>
