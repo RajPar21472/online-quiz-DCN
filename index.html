@@ -1,1405 +1,855 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ET2402 Practical Assessment</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ET2402 Practical Assessment</title>
 
-  <style>
-    :root {
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #1e293b;
-      --border: #e2e8f0;
-      --danger: #ef4444;
-      --success: #22c55e;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 680px;
-      background: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      padding: 30px;
-      position: relative;
-    }
-
-    .header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 15px;
-      border-bottom: 2px solid var(--border);
-      margin-bottom: 20px;
-    }
-
-    .timer-badge {
-      background: #fee2e2;
-      color: var(--danger);
-      font-weight: bold;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.95rem;
-    }
-
-    .warning-banner {
-      background-color: #fef2f2;
-      border: 1px solid #fca5a5;
-      color: #991b1b;
-      padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      font-size: 0.88rem;
-      display: none;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-      margin-bottom: 15px;
-      color: #0f172a;
-    }
-
-    h3 {
-      line-height: 1.5;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    input[type="text"],
-    input[type="password"],
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 1rem;
-      outline: none;
-      transition: border 0.2s;
-    }
-
-    input[type="text"]:focus,
-    input[type="password"]:focus,
-    textarea:focus {
-      border-color: var(--primary);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
-
-    .btn {
-      width: 100%;
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .btn:hover {
-      background: var(--primary-hover);
-    }
-
-    .btn-secondary {
-      background: #f1f5f9;
-      color: #334155;
-      border: 1px solid var(--border);
-      margin-top: 10px;
-    }
-
-    .btn-secondary:hover {
-      background: #e2e8f0;
-    }
-
-    .qr-box {
-      text-align: center;
-      background: #f8fafc;
-      border: 1px dashed var(--border);
-      border-radius: 8px;
-      padding: 15px;
-      margin-top: 15px;
-      display: none;
-    }
-
-    .qr-box img {
-      width: 160px;
-      height: 160px;
-      margin-top: 8px;
-      border-radius: 6px;
-    }
-
-    .options-list {
-      list-style: none;
-      margin-top: 10px;
-    }
-
-    .option-item {
-      margin-bottom: 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      transition: background 0.2s;
-    }
-
-    .option-item:hover {
-      background: #f1f5f9;
-    }
-
-    .option-item input {
-      margin-right: 12px;
-      accent-color: var(--primary);
-    }
-
-    .word-count {
-      text-align: right;
-      font-size: 0.8rem;
-      color: #64748b;
-      margin-top: 4px;
-    }
-
-    .progress-text {
-      font-size: 0.85rem;
-      color: #64748b;
-      font-weight: 600;
-    }
-
-    .score-box {
-      text-align: center;
-      padding: 20px;
-    }
-
-    .score-number {
-      font-size: 3rem;
-      font-weight: bold;
-      color: var(--primary);
-      margin: 10px 0;
-    }
-
-    .info-box {
-      background: #eff6ff;
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 18px;
-      font-size: 0.85rem;
-      color: #1e40af;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
+<style>
+:root {
+  --primary: #174ea6;
+  --primary-dark: #123b7a;
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --text: #202938;
+  --muted: #64748b;
+  --border: #dce3ed;
+  --danger: #c62828;
+  --success: #167647;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.55;
+}
+header {
+  background: linear-gradient(135deg, #123b7a, #2463bd);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+}
+header h1 { margin: 0 0 6px; font-size: 26px; }
+header p { margin: 4px 0; }
+.container { max-width: 920px; margin: 22px auto; padding: 0 14px 40px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px rgba(15, 35, 70, 0.05);
+}
+h2 { margin-top: 0; font-size: 21px; }
+h3 { margin-bottom: 8px; }
+label { display: block; font-weight: 600; margin: 12px 0 5px; }
+input[type="text"], input[type="password"], textarea, select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #bdc9d8;
+  border-radius: 7px;
+  font: inherit;
+  background: #fff;
+}
+textarea { min-height: 100px; resize: vertical; }
+button {
+  border: 0;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  padding: 11px 17px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 5px 5px 5px 0;
+}
+button:hover { background: var(--primary-dark); }
+button.secondary { background: #475569; }
+button.danger { background: var(--danger); }
+button.success { background: var(--success); }
+button:disabled { opacity: .55; cursor: not-allowed; }
+.hidden { display: none !important; }
+.notice {
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin: 12px 0;
+  background: #eaf2ff;
+  border-left: 4px solid var(--primary);
+}
+.warning {
+  background: #fff2e0;
+  border-left: 4px solid #e28b00;
+  padding: 12px;
+  border-radius: 7px;
+}
+.error {
+  background: #ffeded;
+  border-left: 4px solid var(--danger);
+  padding: 12px;
+  border-radius: 7px;
+}
+.success-box {
+  background: #e8f7ed;
+  border-left: 4px solid var(--success);
+  padding: 12px;
+  border-radius: 7px;
+}
+.question {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.question:last-child { border-bottom: 0; }
+.option {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  font-weight: 400;
+  margin: 9px 0;
+}
+.option input { margin-top: 5px; }
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.timer {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--danger);
+}
+.progress {
+  width: 100%;
+  height: 9px;
+  background: #e3e9f2;
+  border-radius: 9px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.progress div {
+  height: 100%;
+  width: 100%;
+  background: #2b72d6;
+  transition: width .3s linear;
+}
+.small { font-size: 13px; color: var(--muted); }
+.qr { width: 180px; height: 180px; object-fit: contain; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid var(--border); padding: 9px; text-align: left; }
+th { background: #edf3fb; }
+footer { text-align: center; color: var(--muted); padding: 20px; }
+@media (max-width: 600px) {
+  .card { padding: 16px; }
+  header h1 { font-size: 22px; }
+}
+</style>
 </head>
 
 <body>
+<header>
+  <h1>ET2402 Practical Assessment</h1>
+  <p>HTML Practical Examination</p>
+  <p>Duration: 10 minutes | 10 questions</p>
+</header>
 
 <div class="container">
 
-  <!-- ================= LOGIN SECTION ================= -->
-
-  <div id="login-section">
-
-    <h2>ET2402 Practical Assessment</h2>
-
-    <div class="form-group">
-      <label for="student-name">Full Name:</label>
-      <input
-        type="text"
-        id="student-name"
-        placeholder="Enter your full name"
-        required
-      >
+  <!-- LOGIN -->
+  <section id="loginCard" class="card">
+    <h2>Student Login</h2>
+    <div class="notice">
+      Enter your student index number and name. Each index is allowed one attempt
+      in this browser until an instructor resets it.
     </div>
 
-    <div class="form-group">
-      <label for="student-index">Index / Student Number:</label>
-      <input
-        type="text"
-        id="student-index"
-        placeholder="e.g., IT2024001"
-        required
-      >
-    </div>
+    <label for="studentIndex">Student Index Number</label>
+    <input id="studentIndex" type="text" placeholder="Enter your index number"
+           autocomplete="off">
 
-    <div class="form-group">
-      <label for="instructor-password">Instructor Passcode / PIN:</label>
-      <input
-        type="password"
-        id="instructor-password"
-        placeholder="Enter instructor passcode to start"
-        required
-      >
-    </div>
+    <label for="studentName">Student Name</label>
+    <input id="studentName" type="text" placeholder="Enter your full name"
+           autocomplete="name">
 
-    <div class="info-box">
-      <strong>Assessment Rules:</strong>
+    <p id="loginMessage" role="alert"></p>
+    <button id="startBtn" onclick="startAssessment()">Start Assessment</button>
 
-      <ul style="margin-left: 18px; margin-top: 5px;">
-        <li>10 questions in total.</li>
-        <li>7 MCQ questions.</li>
-        <li>3 practical questions.</li>
-        <li>Questions are based on the ET2402 practical board.</li>
-        <li>Time limit: 10 minutes.</li>
-        <li>No going back after clicking Next.</li>
-        <li>Two tab switches will automatically submit the test.</li>
-      </ul>
-    </div>
+    <hr style="border:0;border-top:1px solid var(--border);margin:22px 0;">
 
-    <button class="btn" onclick="startViva()">
-      Start Assessment
-    </button>
+    <h3>Assessment QR Code</h3>
+    <p class="small">Scan this code to open the assessment link.</p>
+    <img id="qrImage" class="qr" alt="QR code for assessment link">
+    <p class="small" id="qrHelp"></p>
+  </section>
 
-    <button class="btn btn-secondary" onclick="toggleQRCode()">
-      📱 Show / Hide Join QR Code
-    </button>
-
-    <div id="qr-box" class="qr-box">
-
-      <p style="font-size: 0.85rem; font-weight: 600; color: #475569;">
-        Scan QR Code to Join Assessment
-      </p>
-
-      <img id="qr-img" src="" alt="QR Code">
-
-    </div>
-
-  </div>
-
-
-  <!-- ================= QUIZ SECTION ================= -->
-
-  <div id="quiz-section" class="hidden">
-
-    <div class="header-bar">
-
-      <span
-        class="progress-text"
-        id="question-progress"
-      >
-        Question 1 of 10
-      </span>
-
-      <span
-        class="timer-badge"
-        id="timer-display"
-      >
-        10:00
-      </span>
-
-    </div>
-
-
-    <div id="warning-banner" class="warning-banner">
-
-      ⚠️ <strong>Warning:</strong>
-      Tab switching detected!
-
-      A second violation will automatically submit your assessment.
-
-    </div>
-
-
-    <div id="question-container">
-      <!-- Question will appear here -->
-    </div>
-
-
-    <div style="margin-top: 20px;">
-
-      <button
-        class="btn"
-        id="next-btn"
-        onclick="nextQuestion()"
-      >
-        Next Question
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- ================= RESULT SECTION ================= -->
-
-  <div id="result-section" class="hidden">
-
-    <div class="score-box">
-
-      <h2>Assessment Completed</h2>
-
-      <p style="color: #64748b;">
-        Your response has been recorded and submitted.
-      </p>
-
-      <div
-        class="score-number"
-        id="final-score"
-      >
-        0 / 10
+  <!-- ASSESSMENT -->
+  <section id="assessmentCard" class="hidden">
+    <div class="card">
+      <div class="topbar">
+        <div>
+          <strong id="studentDetails"></strong>
+          <div class="small">Please answer all questions before submitting.</div>
+        </div>
+        <div class="timer" id="timer">10:00</div>
       </div>
-
-      <p
-        id="score-percentage"
-        style="font-weight: 600; font-size: 1.1rem; color: #334155;"
-      ></p>
-
-      <p
-        id="submission-status"
-        style="margin-top: 15px; font-size: 0.85rem; color: #059669;"
-      ></p>
-
-
-      <button
-        class="btn btn-secondary"
-        onclick="resetForNextStudent()"
-        style="margin-top: 20px;"
-      >
-        🔄 Start Next Student's Assessment
-      </button>
-
+      <div class="progress"><div id="progressBar"></div></div>
+      <p class="warning">
+        Do not change tabs or switch windows during the examination.
+        Tab changes will be recorded and warned about.
+      </p>
+      <p id="tabWarning" class="error hidden" role="alert"></p>
     </div>
 
-  </div>
-
-</div>
-
-
-<script>
-
-  /* ============================================================
-     INSTRUCTOR PASSWORD
-     ============================================================ */
-
-  const INSTRUCTOR_PASSWORD = "214721999";
-
-
-  /* ============================================================
-     GOOGLE SHEET WEB APP
-     Keep your existing deployed URL
-     ============================================================ */
-
-  const GOOGLE_SHEET_WEB_APP_URL =
-    "https://script.google.com/macros/s/AKfycbxEqGPFSQTj_gmuPP5UwW2J5LbpQMNd3LdWziOeJY4PR8mMmoCJZusnZh9A6dZpHW2H/exec";
-
-
-  /* ============================================================
-     QUESTION BANK
-     
-     EXACTLY:
-     7 MCQs
-     3 PRACTICAL QUESTIONS
-     
-     Questions are based on the MCM40 practical.
-     ============================================================ */
-
-  const questionBank = [
-
-    /* ==========================================================
-       MCQ 1
-       ========================================================== */
-
-    {
-      id: 1,
-      type: "mcq",
-
-      q: "Which test point is used to observe the transmitted data signal?",
-
-      options: [
-        "TP15",
-        "TP17",
-        "TP20",
-        "TP28"
-      ],
-
-      correct: 1
-    },
-
-
-    /* ==========================================================
-       MCQ 2
-       ========================================================== */
-
-    {
-      id: 2,
-      type: "mcq",
-
-      q: "Which test point is used to observe the transmission clock?",
-
-      options: [
-        "TP17",
-        "TP18",
-        "TP20",
-        "TP25"
-      ],
-
-      correct: 1
-    },
-
-
-    /* ==========================================================
-       MCQ 3
-       ========================================================== */
-
-    {
-      id: 3,
-      type: "mcq",
-
-      q: "When the trainer is set to Manchester mode, where is the Manchester TTL coded signal observed?",
-
-      options: [
-        "TP15",
-        "TP18",
-        "TP20",
-        "TP27"
-      ],
-
-      correct: 2
-    },
-
-
-    /* ==========================================================
-       MCQ 4
-       ========================================================== */
-
-    {
-      id: 4,
-      type: "mcq",
-
-      q: "Which component is used to transmit the optical signal in the practical?",
-
-      options: [
-        "Photodiode",
-        "LED",
-        "Oscilloscope",
-        "Line Driver"
-      ],
-
-      correct: 1
-    },
-
-
-    /* ==========================================================
-       MCQ 5
-       ========================================================== */
-
-    {
-      id: 5,
-      type: "mcq",
-
-      q: "Which component detects the optical signal at the receiver?",
-
-      options: [
-        "LED",
-        "Photodiode",
-        "BIAS Trimmer",
-        "Line Receiver"
-      ],
-
-      correct: 1
-    },
-
-
-    /* ==========================================================
-       MCQ 6
-       ========================================================== */
-
-    {
-      id: 6,
-      type: "mcq",
-
-      q: "In the PC data transmission practical, what is the maximum speed set in the terminal software?",
-
-      options: [
-        "9600 bps",
-        "1200 bps",
-        "19200 bps",
-        "38400 bps"
-      ],
-
-      correct: 2
-    },
-
-
-    /* ==========================================================
-       MCQ 7
-       ========================================================== */
-
-    {
-      id: 7,
-      type: "mcq",
-
-      q: "Which test point shows the received data signal in TTL format during PC transmission?",
-
-      options: [
-        "TP21",
-        "TP17",
-        "TP27",
-        "TP22"
-      ],
-
-      correct: 2
-    },
-
-
-    /* ==========================================================
-       PRACTICAL QUESTION 1
-       ========================================================== */
-
-    {
-      id: 8,
-
-      type: "typed",
-
-      q: "On the trainer board, if you want to observe the transmitted data and transmission clock using the oscilloscope, which test points do you use?",
-
-      keywords: [
-        "TP17",
-        "TP18"
-      ],
-
-      maxWords: 30
-    },
-
-
-    /* ==========================================================
-       PRACTICAL QUESTION 2
-       ========================================================== */
-
-    {
-      id: 9,
-
-      type: "typed",
-
-      q: "During optical data transmission, what are TP24, TP25 and TP27 used for?",
-
-      keywords: [
-        "TP24",
-        "photodiode",
-        "TP25",
-        "received",
-        "TTL",
-        "TP27",
-        "data"
-      ],
-
-      maxWords: 50
-    },
-
-
-    /* ==========================================================
-       PRACTICAL QUESTION 3
-       ========================================================== */
-
-    {
-      id: 10,
-
-      type: "typed",
-
-      q: "During PC serial transmission, what signals are observed at TP21, TP17, TP27 and TP22?",
-
-      keywords: [
-        "TP21",
-        "RS232",
-        "TP17",
-        "TTL",
-        "TP27",
-        "received",
-        "TP22",
-        "RS232"
-      ],
-
-      maxWords: 60
-    }
-
-  ];
-
-
-  /* ============================================================
-     STATE VARIABLES
-     ============================================================ */
-
-  let studentData = {
-    name: "",
-    indexNumber: ""
-  };
-
-  let selectedQuestions = [];
-
-  let currentQuestionIndex = 0;
-
-  let totalScore = 0;
-
-  let timeRemaining = 600;
-
-  let timerInterval = null;
-
-  let tabSwitchViolations = 0;
-
-
-  /* ============================================================
-     QR CODE
-     ============================================================ */
-
-  function toggleQRCode() {
-
-    const qrBox = document.getElementById("qr-box");
-
-    const qrImg = document.getElementById("qr-img");
-
-    if (qrBox.style.display === "block") {
-
-      qrBox.style.display = "none";
-
-    } else {
-
-      const currentURL = window.location.href;
-
-      qrImg.src =
-        "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
-        encodeURIComponent(currentURL);
-
-      qrBox.style.display = "block";
-    }
-  }
-
-
-  /* ============================================================
-     GENERATE QUIZ
-     
-     EXACTLY 7 MCQs + 3 PRACTICAL QUESTIONS
-     ============================================================ */
-
-  function generateQuizSet() {
-
-    const mcqs = questionBank
-      .filter(q => q.type === "mcq")
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 7);
-
-
-    const practicalQuestions = questionBank
-      .filter(q => q.type === "typed")
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
-
-
-    return [...mcqs, ...practicalQuestions]
-      .sort(() => 0.5 - Math.random());
-  }
-
-
-  /* ============================================================
-     START ASSESSMENT
-     ============================================================ */
-
-  function startViva() {
-
-    const nameInput =
-      document.getElementById("student-name").value.trim();
-
-    const indexInput =
-      document.getElementById("student-index").value.trim();
-
-    const passwordInput =
-      document.getElementById("instructor-password").value.trim();
-
-
-    if (!nameInput || !indexInput) {
-
-      alert(
-        "Please enter both your Name and Index Number."
-      );
-
-      return;
-    }
-
-
-    if (passwordInput !== INSTRUCTOR_PASSWORD) {
-
-      alert(
-        "❌ Invalid Instructor Passcode!"
-      );
-
-      return;
-    }
-
-
-    studentData.name = nameInput;
-
-    studentData.indexNumber = indexInput;
-
-
-    selectedQuestions = generateQuizSet();
-
-
-    currentQuestionIndex = 0;
-
-    totalScore = 0;
-
-    timeRemaining = 600;
-
-    tabSwitchViolations = 0;
-
-
-    document
-      .getElementById("login-section")
-      .classList.add("hidden");
-
-
-    document
-      .getElementById("quiz-section")
-      .classList.remove("hidden");
-
-
-    timerInterval =
-      setInterval(updateTimer, 1000);
-
-
-    renderQuestion();
-
-
-    setupProctoring();
-  }
-
-
-  /* ============================================================
-     TIMER
-     ============================================================ */
-
-  function updateTimer() {
-
-    timeRemaining--;
-
-
-    let mins =
-      Math.floor(timeRemaining / 60);
-
-    let secs =
-      timeRemaining % 60;
-
-
-    document.getElementById(
-      "timer-display"
-    ).innerText =
-      `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-
-
-    if (timeRemaining <= 0) {
-
-      clearInterval(timerInterval);
-
-      alert(
-        "Time is up! Submitting your assessment."
-      );
-
-      finishQuiz("Time Expired");
-    }
-  }
-
-
-  /* ============================================================
-     TAB SWITCH DETECTION
-     ============================================================ */
-
-  function setupProctoring() {
-
-    document.addEventListener(
-      "visibilitychange",
-      handleVisibilityChange
-    );
-  }
-
-
-  function handleVisibilityChange() {
-
-    if (
-      document.hidden &&
-      currentQuestionIndex <
-      selectedQuestions.length
-    ) {
-
-      tabSwitchViolations++;
-
-
-      if (tabSwitchViolations === 1) {
-
-        document.getElementById(
-          "warning-banner"
-        ).style.display = "block";
-
-      } else if (tabSwitchViolations >= 2) {
-
-        clearInterval(timerInterval);
-
-
-        alert(
-          "Multiple tab switches detected! " +
-          "Your assessment is being automatically submitted."
-        );
-
-
-        finishQuiz(
-          "Auto-submitted: Tab Switch Violation"
-        );
-      }
-    }
-  }
-
-
-  /* ============================================================
-     RENDER QUESTION
-     ============================================================ */
-
-  function renderQuestion() {
-
-    const q =
-      selectedQuestions[currentQuestionIndex];
-
-
-    const container =
-      document.getElementById(
-        "question-container"
-      );
-
-
-    document.getElementById(
-      "question-progress"
-    ).innerText =
-      `Question ${currentQuestionIndex + 1} of 10`;
-
-
-    let html = `
-
-      <h3 style="
-        margin-bottom: 15px;
-        font-size: 1.1rem;
-      ">
-        ${currentQuestionIndex + 1}. ${q.q}
-      </h3>
-
-    `;
-
-
-    /* ================= MCQ ================= */
-
-    if (q.type === "mcq") {
-
-      html += `
-        <ul class="options-list">
-      `;
-
-
-      q.options.forEach(
-        (option, index) => {
-
-          html += `
-
-            <label class="option-item">
-
-              <input
-                type="radio"
-                name="mcq_option"
-                value="${index}"
-              >
-
-              <span>
-                ${option}
-              </span>
-
-            </label>
-
-          `;
-        }
-      );
-
-
-      html += `
-        </ul>
-      `;
-
-    }
-
-
-    /* ================= PRACTICAL ================= */
-
-    else {
-
-      html += `
-
-        <textarea
-          id="typed-answer"
-          placeholder="Type your practical answer here..."
-          oninput="checkWordCount(${q.maxWords})"
-        ></textarea>
-
-        <div
-          class="word-count"
-          id="word-count-display"
-        >
-          Words: 0 / ${q.maxWords}
+    <form id="assessmentForm">
+      <div class="card">
+        <h2>Part A — Practical Questions</h2>
+        <p class="small">Questions 1–3. Answer clearly. These responses require instructor marking.</p>
+
+        <div class="question">
+          <h3>Question 1 — Basic HTML Structure (10 marks)</h3>
+          <p>
+            Write the basic HTML5 structure for a web page. Include the
+            DOCTYPE declaration, html element, head, title, and body.
+          </p>
+          <textarea id="p1" placeholder="Write your HTML code here..." required></textarea>
         </div>
 
-      `;
-    }
+        <div class="question">
+          <h3>Question 2 — Hyperlink and Image (10 marks)</h3>
+          <p>
+            Write HTML code to display an image named <code>computer.jpg</code>
+            with alternative text "Computer". Below it, create a hyperlink to
+            <code>https://www.google.com</code> with the text "Visit Google".
+          </p>
+          <textarea id="p2" placeholder="Write your HTML code here..." required></textarea>
+        </div>
 
+        <div class="question">
+          <h3>Question 3 — Table Creation (10 marks)</h3>
+          <p>
+            Write HTML code for a table with two columns: Student Name and Index
+            Number. Add one header row and two student data rows of your choice.
+          </p>
+          <textarea id="p3" placeholder="Write your HTML code here..." required></textarea>
+        </div>
+      </div>
 
-    container.innerHTML = html;
+      <div class="card">
+        <h2>Part B — Multiple-Choice Questions</h2>
+        <p class="small">Questions 4–10. Select one answer for each question.</p>
 
+        <div class="question">
+          <h3>Question 4. What does HTML stand for?</h3>
+          <label class="option"><input type="radio" name="q4" value="A" required> A. Hyper Trainer Marking Language</label>
+          <label class="option"><input type="radio" name="q4" value="B"> B. HyperText Markup Language</label>
+          <label class="option"><input type="radio" name="q4" value="C"> C. HighText Machine Language</label>
+          <label class="option"><input type="radio" name="q4" value="D"> D. Hyperlink and Text Management Language</label>
+        </div>
 
-    if (
-      currentQuestionIndex ===
-      selectedQuestions.length - 1
-    ) {
+        <div class="question">
+          <h3>Question 5. Which element contains the visible page content?</h3>
+          <label class="option"><input type="radio" name="q5" value="A" required> A. &lt;head&gt;</label>
+          <label class="option"><input type="radio" name="q5" value="B"> B. &lt;title&gt;</label>
+          <label class="option"><input type="radio" name="q5" value="C"> C. &lt;body&gt;</label>
+          <label class="option"><input type="radio" name="q5" value="D"> D. &lt;meta&gt;</label>
+        </div>
 
-      document.getElementById(
-        "next-btn"
-      ).innerText = "Submit Assessment";
+        <div class="question">
+          <h3>Question 6. Which element creates a hyperlink?</h3>
+          <label class="option"><input type="radio" name="q6" value="A" required> A. &lt;linkto&gt;</label>
+          <label class="option"><input type="radio" name="q6" value="B"> B. &lt;a&gt;</label>
+          <label class="option"><input type="radio" name="q6" value="C"> C. &lt;href&gt;</label>
+          <label class="option"><input type="radio" name="q6" value="D"> D. &lt;url&gt;</label>
+        </div>
 
-    } else {
+        <div class="question">
+          <h3>Question 7. Which attribute specifies an image file path?</h3>
+          <label class="option"><input type="radio" name="q7" value="A" required> A. href</label>
+          <label class="option"><input type="radio" name="q7" value="B"> B. alt</label>
+          <label class="option"><input type="radio" name="q7" value="C"> C. src</label>
+          <label class="option"><input type="radio" name="q7" value="D"> D. path</label>
+        </div>
 
-      document.getElementById(
-        "next-btn"
-      ).innerText = "Next Question";
-    }
+        <div class="question">
+          <h3>Question 8. Which element creates a table row?</h3>
+          <label class="option"><input type="radio" name="q8" value="A" required> A. &lt;td&gt;</label>
+          <label class="option"><input type="radio" name="q8" value="B"> B. &lt;tr&gt;</label>
+          <label class="option"><input type="radio" name="q8" value="C"> C. &lt;th&gt;</label>
+          <label class="option"><input type="radio" name="q8" value="D"> D. &lt;table-row&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>Question 9. Which element creates an unordered list?</h3>
+          <label class="option"><input type="radio" name="q9" value="A" required> A. &lt;ol&gt;</label>
+          <label class="option"><input type="radio" name="q9" value="B"> B. &lt;li&gt;</label>
+          <label class="option"><input type="radio" name="q9" value="C"> C. &lt;ul&gt;</label>
+          <label class="option"><input type="radio" name="q9" value="D"> D. &lt;list&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>Question 10. What is the purpose of the alt attribute in an image?</h3>
+          <label class="option"><input type="radio" name="q10" value="A" required> A. To create a table</label>
+          <label class="option"><input type="radio" name="q10" value="B"> B. To set the page title</label>
+          <label class="option"><input type="radio" name="q10" value="C"> C. To provide alternative text for the image</label>
+          <label class="option"><input type="radio" name="q10" value="D"> D. To change the image file name</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="warning">
+          Check your answers before submitting. After submission, the index
+          will be locked in this browser until an instructor resets it.
+        </div>
+        <button type="button" id="submitBtn" class="success" onclick="submitAssessment(false)">
+          Submit Assessment
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- SUBMISSION RESULT -->
+  <section id="resultCard" class="card hidden">
+    <h2>Assessment Submitted</h2>
+    <div class="success-box">
+      Your attempt has been recorded in this browser. Please wait for your
+      instructor to confirm that the submission was received.
+    </div>
+    <p id="resultDetails"></p>
+    <p id="sheetStatus" class="small"></p>
+  </section>
+
+  <!-- INSTRUCTOR ACCESS -->
+  <section class="card">
+    <h2>Instructor Panel</h2>
+    <p class="small">Instructor access is password-protected.</p>
+    <button class="secondary" onclick="openInstructor()">Open Instructor Panel</button>
+  </section>
+
+  <section id="instructorCard" class="card hidden">
+    <h2>Instructor — Super Reset</h2>
+    <p class="warning">
+      A reset clears the local browser lock only. It does not delete submitted
+      records from Google Sheets.
+    </p>
+
+    <label for="resetIndex">Student Index Number to Reset</label>
+    <input id="resetIndex" type="text" placeholder="Enter the exact student index">
+    <button class="success" onclick="resetOneStudent()">Reset One Student</button>
+    <button class="danger" onclick="resetAllStudents()">SUPER RESET — All Local Locks</button>
+    <button class="secondary" onclick="closeInstructor()">Close Panel</button>
+
+    <h3>Local Attempt Records</h3>
+    <div id="attemptRecords" class="small"></div>
+  </section>
+</div>
+
+<footer>ET2402 Practical Assessment</footer>
+
+<script>
+"use strict";
+
+/* =========================================================
+   CONFIGURATION
+   ========================================================= */
+
+// Existing Google Apps Script web app URL:
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxEqGPFSQTj_gmuPP5UwW2J5LbpQMNd3LdWziOeJY4PR8mMmoCJZusnZh9A6dZpHW2H/exec";
+
+// Instructor password supplied for this assessment.
+// For stronger security, validate instructor actions in Apps Script.
+const INSTRUCTOR_PASSWORD = "214722000";
+
+const EXAM_DURATION_SECONDS = 10 * 60;
+const STORAGE_PREFIX = "ET2402_ATTEMPT_";
+const RECORDS_KEY = "ET2402_ATTEMPT_RECORDS";
+
+const MCQ_ANSWERS = {
+  q4: "B",
+  q5: "C",
+  q6: "B",
+  q7: "C",
+  q8: "B",
+  q9: "C",
+  q10: "C"
+};
+
+let currentStudent = null;
+let remainingSeconds = EXAM_DURATION_SECONDS;
+let timerInterval = null;
+let tabSwitchCount = 0;
+let submitted = false;
+
+/* =========================================================
+   QR CODE
+   ========================================================= */
+
+function createQRCode() {
+  const currentURL = window.location.href;
+  const qr = document.getElementById("qrImage");
+  const help = document.getElementById("qrHelp");
+
+  if (currentURL.startsWith("file:")) {
+    qr.classList.add("hidden");
+    help.textContent =
+      "This page is currently opened as a local file. Host the HTML page online " +
+      "and replace its link to create a QR code students can scan.";
+    return;
   }
 
+  qr.src =
+    "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" +
+    encodeURIComponent(currentURL);
 
-  /* ============================================================
-     WORD COUNT
-     ============================================================ */
+  help.textContent = "QR code for the current page URL.";
+}
 
-  function checkWordCount(maxWords) {
+/* =========================================================
+   LOCAL ATTEMPT RECORDS
+   Note: these records belong to this browser only.
+   ========================================================= */
 
-    const textarea =
-      document.getElementById(
-        "typed-answer"
-      );
+function getRecords() {
+  try {
+    return JSON.parse(localStorage.getItem(RECORDS_KEY) || "{}");
+  } catch (error) {
+    return {};
+  }
+}
 
+function saveRecords(records) {
+  localStorage.setItem(RECORDS_KEY, JSON.stringify(records));
+}
 
-    const words =
-      textarea.value
-        .trim()
-        .split(/\s+/)
-        .filter(word => word.length > 0);
+function storageKey(index) {
+  return STORAGE_PREFIX + index.trim().toLowerCase();
+}
 
+function getAttempt(index) {
+  try {
+    const value = localStorage.getItem(storageKey(index));
+    return value ? JSON.parse(value) : null;
+  } catch (error) {
+    return null;
+  }
+}
 
-    document.getElementById(
-      "word-count-display"
-    ).innerText =
-      `Words: ${words.length} / ${maxWords}`;
+function saveAttempt(index, record) {
+  localStorage.setItem(storageKey(index), JSON.stringify(record));
 
+  const records = getRecords();
+  records[index.trim().toLowerCase()] = record;
+  saveRecords(records);
+}
 
-    if (words.length > maxWords) {
+/* =========================================================
+   STUDENT LOGIN
+   ========================================================= */
 
-      document.getElementById(
-        "word-count-display"
-      ).style.color = "red";
+function startAssessment() {
+  const index = document.getElementById("studentIndex").value.trim();
+  const name = document.getElementById("studentName").value.trim();
+  const message = document.getElementById("loginMessage");
 
-    } else {
+  message.textContent = "";
+  message.className = "";
 
-      document.getElementById(
-        "word-count-display"
-      ).style.color = "#64748b";
-    }
+  if (!index || !name) {
+    message.textContent = "Please enter both your index number and name.";
+    message.className = "error";
+    return;
   }
 
+  const previousAttempt = getAttempt(index);
 
-  /* ============================================================
-     CHECK PRACTICAL ANSWER
-     ============================================================ */
-
-  function evaluatePracticalAnswer(q, text) {
-
-    let matched = 0;
-
-
-    q.keywords.forEach(
-      keyword => {
-
-        if (
-          text.includes(
-            keyword.toLowerCase()
-          )
-        ) {
-
-          matched++;
-        }
-      }
-    );
-
-
-    const matchRatio =
-      matched / q.keywords.length;
-
-
-    /*
-      Practical question marking:
-
-      75% or more keywords = 1 mark
-      50% or more keywords = 0.5 mark
-      Less than 50% = 0
-    */
-
-    if (matchRatio >= 0.75) {
-
-      return 1;
-
-    } else if (matchRatio >= 0.50) {
-
-      return 0.5;
-
-    } else {
-
-      return 0;
-    }
+  if (previousAttempt && previousAttempt.status === "submitted") {
+    message.textContent =
+      "This student index has already submitted an attempt in this browser. " +
+      "Please contact the instructor for a reset.";
+    message.className = "error";
+    return;
   }
 
+  if (previousAttempt && previousAttempt.status === "in-progress") {
+    message.textContent =
+      "An assessment attempt is already in progress for this index in this browser. " +
+      "Please contact the instructor if you need assistance.";
+    message.className = "error";
+    return;
+  }
 
-  /* ============================================================
-     NEXT QUESTION
-     ============================================================ */
+  currentStudent = { index: index, name: name };
+  submitted = false;
+  remainingSeconds = EXAM_DURATION_SECONDS;
+  tabSwitchCount = 0;
 
-  function nextQuestion() {
+  saveAttempt(index, {
+    name: name,
+    status: "in-progress",
+    startedAt: new Date().toISOString()
+  });
 
-    const q =
-      selectedQuestions[currentQuestionIndex];
+  document.getElementById("loginCard").classList.add("hidden");
+  document.getElementById("assessmentCard").classList.remove("hidden");
+  document.getElementById("studentDetails").textContent =
+    name + " | Index: " + index;
 
+  startTimer();
+}
 
-    /* ================= MCQ ================= */
+/* =========================================================
+   TIMER
+   ========================================================= */
 
-    if (q.type === "mcq") {
+function startTimer() {
+  updateTimerDisplay();
 
-      const selected =
-        document.querySelector(
-          'input[name="mcq_option"]:checked'
-        );
+  if (timerInterval) clearInterval(timerInterval);
 
-
-      if (!selected) {
-
-        alert(
-          "Please select an answer before proceeding."
-        );
-
-        return;
-      }
-
-
-      if (
-        parseInt(selected.value) ===
-        q.correct
-      ) {
-
-        totalScore += 1;
-      }
-
-    }
-
-
-    /* ================= PRACTICAL ================= */
-
-    else {
-
-      const textarea =
-        document.getElementById(
-          "typed-answer"
-        );
-
-
-      const text =
-        textarea.value
-          .trim()
-          .toLowerCase();
-
-
-      const words =
-        text
-          .split(/\s+/)
-          .filter(word => word.length > 0);
-
-
-      if (words.length === 0) {
-
-        alert(
-          "Please type your practical answer before proceeding."
-        );
-
-        return;
-      }
-
-
-      if (words.length > q.maxWords) {
-
-        alert(
-          `Please keep your answer within ${q.maxWords} words.`
-        );
-
-        return;
-      }
-
-
-      totalScore +=
-        evaluatePracticalAnswer(
-          q,
-          text
-        );
-    }
-
-
-    currentQuestionIndex++;
-
-
-    if (
-      currentQuestionIndex <
-      selectedQuestions.length
-    ) {
-
-      renderQuestion();
-
-    } else {
-
+  timerInterval = setInterval(function () {
+    if (submitted) {
       clearInterval(timerInterval);
+      return;
+    }
 
-      finishQuiz(
-        "Normal Submission"
+    remainingSeconds--;
+    updateTimerDisplay();
+
+    if (remainingSeconds <= 0) {
+      clearInterval(timerInterval);
+      submitAssessment(true);
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(remainingSeconds / 60);
+  const seconds = remainingSeconds % 60;
+
+  document.getElementById("timer").textContent =
+    String(minutes).padStart(2, "0") + ":" +
+    String(seconds).padStart(2, "0");
+
+  const percentage = Math.max(
+    0,
+    (remainingSeconds / EXAM_DURATION_SECONDS) * 100
+  );
+  document.getElementById("progressBar").style.width = percentage + "%";
+}
+
+/* =========================================================
+   TAB SWITCH WARNING
+   ========================================================= */
+
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden && currentStudent && !submitted) {
+    tabSwitchCount++;
+
+    const warning = document.getElementById("tabWarning");
+    warning.classList.remove("hidden");
+    warning.textContent =
+      "Warning: you switched away from the assessment. Recorded warning count: " +
+      tabSwitchCount + ". Please return to the assessment.";
+  }
+});
+
+/* =========================================================
+   COLLECT ANSWERS AND GRADE MCQs
+   ========================================================= */
+
+function getRadioAnswer(questionName) {
+  const selected = document.querySelector(
+    'input[name="' + questionName + '"]:checked'
+  );
+  return selected ? selected.value : "";
+}
+
+function collectAnswers() {
+  const answers = {
+    practical1: document.getElementById("p1").value.trim(),
+    practical2: document.getElementById("p2").value.trim(),
+    practical3: document.getElementById("p3").value.trim(),
+    q4: getRadioAnswer("q4"),
+    q5: getRadioAnswer("q5"),
+    q6: getRadioAnswer("q6"),
+    q7: getRadioAnswer("q7"),
+    q8: getRadioAnswer("q8"),
+    q9: getRadioAnswer("q9"),
+    q10: getRadioAnswer("q10")
+  };
+
+  return answers;
+}
+
+function calculateMCQScore(answers) {
+  let score = 0;
+  let answered = 0;
+
+  Object.keys(MCQ_ANSWERS).forEach(function (key) {
+    if (answers[key]) answered++;
+    if (answers[key] === MCQ_ANSWERS[key]) score++;
+  });
+
+  return {
+    score: score,
+    total: Object.keys(MCQ_ANSWERS).length,
+    answered: answered
+  };
+}
+
+/* =========================================================
+   SUBMIT ASSESSMENT
+   ========================================================= */
+
+async function submitAssessment(isTimeout) {
+  if (submitted || !currentStudent) return;
+
+  const answers = collectAnswers();
+
+  if (!isTimeout) {
+    const unanswered = [];
+
+    for (let i = 1; i <= 3; i++) {
+      if (!answers["practical" + i]) {
+        unanswered.push("Practical question " + i);
+      }
+    }
+
+    for (let i = 4; i <= 10; i++) {
+      if (!answers["q" + i]) {
+        unanswered.push("MCQ " + i);
+      }
+    }
+
+    if (unanswered.length > 0) {
+      const proceed = confirm(
+        "You have unanswered questions:\n\n" +
+        unanswered.join(", ") +
+        "\n\nSubmit anyway?"
       );
+
+      if (!proceed) return;
+    } else {
+      if (!confirm("Are you sure you want to submit your assessment?")) return;
     }
   }
 
+  submitted = true;
 
-  /* ============================================================
-     FINISH QUIZ
-     ============================================================ */
+  if (timerInterval) clearInterval(timerInterval);
 
-  function finishQuiz(statusReason) {
-
-    clearInterval(timerInterval);
-
-
-    document
-      .getElementById("quiz-section")
-      .classList.add("hidden");
-
-
-    document
-      .getElementById("result-section")
-      .classList.remove("hidden");
-
-
-    const finalMarks =
-      Math.min(
-        10,
-        Math.round(totalScore * 10) / 10
-      );
-
-
-    const percentage =
-      Math.round(
-        (finalMarks / 10) * 100
-      );
-
-
-    const timeSpentSeconds =
-      600 - timeRemaining;
-
-
-    const timeSpentStr =
-      `${Math.floor(timeSpentSeconds / 60)}m ` +
-      `${timeSpentSeconds % 60}s`;
-
-
-    document.getElementById(
-      "final-score"
-    ).innerText =
-      `${finalMarks} / 10`;
-
-
-    document.getElementById(
-      "score-percentage"
-    ).innerText =
-      `Score: ${percentage}%`;
-
-
-    const payload = {
-
-      indexNumber:
-        studentData.indexNumber,
-
-      name:
-        studentData.name,
-
-      score:
-        finalMarks,
-
-      total:
-        10,
-
-      percentage:
-        percentage,
-
-      timeSpent:
-        timeSpentStr,
-
-      violations:
-        tabSwitchViolations,
-
-      status:
-        statusReason
-    };
-
-
-    /* ========================================================
-       SAVE RESULT TO GOOGLE SHEET
-       ======================================================== */
-
-    fetch(
-      GOOGLE_SHEET_WEB_APP_URL,
-      {
-
-        method: "POST",
-
-        mode: "no-cors",
-
-        headers: {
-          "Content-Type":
-            "application/json"
-        },
-
-        body:
-          JSON.stringify(payload)
-      }
-    )
-
-    .then(() => {
-
-      document.getElementById(
-        "submission-status"
-      ).innerText =
-        "✔ Marks successfully submitted.";
-
-    })
-
-    .catch(error => {
-
-      console.error(error);
-
-      document.getElementById(
-        "submission-status"
-      ).innerText =
-        "⚠ Assessment completed, but connection to Google Sheet could not be confirmed.";
-
+  document.getElementById("submitBtn").disabled = true;
+  document.querySelectorAll("#assessmentForm input, #assessmentForm textarea")
+    .forEach(function (element) {
+      element.disabled = true;
     });
+
+  const mcq = calculateMCQScore(answers);
+
+  const payload = {
+    action: "submit",
+    assessment: "ET2402 Practical Assessment",
+    studentIndex: currentStudent.index,
+    studentName: currentStudent.name,
+    submittedAt: new Date().toISOString(),
+    timedOut: Boolean(isTimeout),
+    durationSeconds: EXAM_DURATION_SECONDS - Math.max(remainingSeconds, 0),
+    tabSwitchCount: tabSwitchCount,
+    practical1: answers.practical1,
+    practical2: answers.practical2,
+    practical3: answers.practical3,
+    q4: answers.q4,
+    q5: answers.q5,
+    q6: answers.q6,
+    q7: answers.q7,
+    q8: answers.q8,
+    q9: answers.q9,
+    q10: answers.q10,
+    mcqScore: mcq.score,
+    mcqTotal: mcq.total,
+    practicalMarking: "Pending instructor marking"
+  };
+
+  // Save the local lock before sending the submission.
+  saveAttempt(currentStudent.index, {
+    name: currentStudent.name,
+    status: "submitted",
+    submittedAt: payload.submittedAt,
+    mcqScore: mcq.score,
+    mcqTotal: mcq.total
+  });
+
+  document.getElementById("assessmentCard").classList.add("hidden");
+  document.getElementById("resultCard").classList.remove("hidden");
+
+  document.getElementById("resultDetails").textContent =
+    "Student: " + currentStudent.name +
+    " | Index: " + currentStudent.index +
+    " | MCQ score: " + mcq.score + "/" + mcq.total +
+    " | Practical answers require instructor marking." +
+    (isTimeout ? " The assessment was submitted when time expired." : "");
+
+  document.getElementById("sheetStatus").textContent =
+    "Sending the submission to Google Sheets. Please confirm receipt with your instructor.";
+
+  try {
+    /*
+      This uses a simple text/plain POST so the request can often be sent
+      without a CORS preflight. A no-cors response cannot confirm success.
+
+      Your Apps Script doPost(e) must read e.postData.contents as JSON
+      and append the fields to your Google Sheet.
+    */
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    document.getElementById("sheetStatus").textContent =
+      "The submission request was sent. Because the browser cannot read a " +
+      "no-cors response, successful saving to Google Sheets cannot be verified here. " +
+      "Please confirm that the row appears in the spreadsheet.";
+  } catch (error) {
+    document.getElementById("sheetStatus").textContent =
+      "The submission could not be confirmed by the browser. Contact the instructor " +
+      "and check the Google Sheet before attempting any reset.";
+  }
+}
+
+/* =========================================================
+   INSTRUCTOR PANEL
+   ========================================================= */
+
+function openInstructor() {
+  const password = prompt("Enter instructor password:");
+
+  if (password !== INSTRUCTOR_PASSWORD) {
+    alert("Incorrect instructor password.");
+    return;
   }
 
+  document.getElementById("instructorCard").classList.remove("hidden");
+  refreshAttemptRecords();
+}
 
-  /* ============================================================
-     RESET FOR NEXT STUDENT
-     ============================================================ */
+function closeInstructor() {
+  document.getElementById("instructorCard").classList.add("hidden");
+}
 
-  function resetForNextStudent() {
+function resetOneStudent() {
+  const index = document.getElementById("resetIndex").value.trim();
 
-    studentData = {
-      name: "",
-      indexNumber: ""
-    };
-
-
-    selectedQuestions = [];
-
-    currentQuestionIndex = 0;
-
-    totalScore = 0;
-
-    timeRemaining = 600;
-
-    tabSwitchViolations = 0;
-
-
-    if (timerInterval) {
-
-      clearInterval(timerInterval);
-
-      timerInterval = null;
-    }
-
-
-    document.getElementById(
-      "student-name"
-    ).value = "";
-
-
-    document.getElementById(
-      "student-index"
-    ).value = "";
-
-
-    document.getElementById(
-      "instructor-password"
-    ).value = "";
-
-
-    document.getElementById(
-      "result-section"
-    ).classList.add("hidden");
-
-
-    document.getElementById(
-      "quiz-section"
-    ).classList.add("hidden");
-
-
-    document.getElementById(
-      "login-section"
-    ).classList.remove("hidden");
-
-
-    document.getElementById(
-      "warning-banner"
-    ).style.display = "none";
-
-
-    document.getElementById(
-      "timer-display"
-    ).innerText = "10:00";
+  if (!index) {
+    alert("Enter the student index number to reset.");
+    return;
   }
 
+  if (!confirm(
+    "Reset the local attempt lock for index " + index + "?\n\n" +
+    "This does not delete previous Google Sheets submissions."
+  )) return;
+
+  localStorage.removeItem(storageKey(index));
+
+  const records = getRecords();
+  delete records[index.toLowerCase()];
+  saveRecords(records);
+
+  alert(
+    "Local lock cleared for " + index + ". " +
+    "This reset applies only to this browser."
+  );
+
+  refreshAttemptRecords();
+}
+
+function resetAllStudents() {
+  const confirmation = prompt(
+    "SUPER RESET: This clears all ET2402 attempt locks in this browser.\n\n" +
+    "Type RESET ALL to continue:"
+  );
+
+  if (confirmation !== "RESET ALL") {
+    alert("Super Reset cancelled.");
+    return;
+  }
+
+  const records = getRecords();
+
+  Object.keys(records).forEach(function (key) {
+    localStorage.removeItem(STORAGE_PREFIX + key);
+  });
+
+  localStorage.removeItem(RECORDS_KEY);
+
+  alert(
+    "All local attempt locks have been cleared in this browser. " +
+    "Google Sheets records have not been deleted. This does not reset locks " +
+    "on other computers or phones."
+  );
+
+  refreshAttemptRecords();
+}
+
+function refreshAttemptRecords() {
+  const records = getRecords();
+  const container = document.getElementById("attemptRecords");
+  const keys = Object.keys(records);
+
+  if (keys.length === 0) {
+    container.textContent = "No local attempt records.";
+    return;
+  }
+
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  const headerRow = document.createElement("tr");
+
+  ["Index", "Name", "Status", "Submitted At"].forEach(function (heading) {
+    const th = document.createElement("th");
+    th.textContent = heading;
+    headerRow.appendChild(th);
+  });
+
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement("tbody");
+
+  keys.forEach(function (key) {
+    const record = records[key] || {};
+    const row = document.createElement("tr");
+
+    [
+      key,
+      record.name || "",
+      record.status || "",
+      record.submittedAt || ""
+    ].forEach(function (value) {
+      const td = document.createElement("td");
+      td.textContent = value;
+      row.appendChild(td);
+    });
+
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  container.replaceChildren(table);
+}
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+createQRCode();
 </script>
-
 </body>
 </html>
